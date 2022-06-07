@@ -21,8 +21,8 @@ function Home() {
   var counter = tasks.length + 1;
 
   return (
-    <div>
-      <h1>ToDo List</h1>
+    <div className="home">
+      <h1>2do List</h1>
       <AddBar />
       <Filter setFilter={setFilter} />
       <Sort sort={sort} setSort={setSort} />

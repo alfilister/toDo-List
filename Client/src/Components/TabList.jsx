@@ -19,9 +19,9 @@ function TabList({ task }) {
   };
 
   return (
-    <div>
-      <div>{task.task}</div>
-      <div>{task.priority}</div>
+    <div className="tabList">
+      <h5>{task.task}</h5>
+      <h5>{task.priority}</h5>
       <button onClick={(e) => handleCheck(e)} type="checkbox">
         {task.status === "Active" ? "Complete" : "Restore"}
       </button>

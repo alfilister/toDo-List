@@ -35,24 +35,26 @@ function List({ tasks, setTasks, filter, sort }) {
       }));
 
   return (
-    <div>
+    <div className="list">
       <header>
         <h6>Activities</h6>
         <h6>Priority</h6>
+        <h6>Status</h6>
+        <h6>Delete</h6>
       </header>
-      <div>
+      <div className="tabsTasks">
         {toShow.map((el) => (
           <TabList task={el} key={el.id} />
         ))}
       </div>
       <div>
-        <div>
+        <h6>
           {!toShow.length
             ? "Empty list"
             : toShow.length === 1
             ? `${toShow.length} task listed`
             : `${toShow.length} tasks listed`}
-        </div>
+        </h6>
       </div>
     </div>
   );

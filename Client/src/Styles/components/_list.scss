@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  width: 600px;
+
+  header {
+    display: grid;
+    grid-template-columns: 30% 20% 20% 20%;
+
+    h6 {
+      font-family: "Dancing Script", cursive;
+      font-size: 1.5em;
+      color: whitesmoke;
+      text-align: center;
+      margin: 0 0.5em 0 0;
+    }
+  }
+
+  .tabsTasks {
+    height: 30vh;
+    overflow-y: scroll;
+  }
+
+  h6 {
+    font-weight: 400;
+    font-size: 1em;
+    color: whitesmoke;
+    text-align: center;
+    margin: 0 0.5em 0 0;
+  }
+}

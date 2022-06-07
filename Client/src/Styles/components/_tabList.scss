@@ -1,0 +1,47 @@
+.tabList {
+  display: grid;
+  grid-template-columns: 30% 20% 20% 20%;
+  align-items: center;
+
+  height: 3em;
+  margin: 0.5em 0;
+
+  &:hover {
+    background-color: rgba(245, 245, 245, 0.2);
+  }
+
+  h5 {
+    font-weight: 300;
+    font-size: 1em;
+    color: whitesmoke;
+    text-align: center;
+    margin: 0 0.5em 0 0;
+  }
+
+  button {
+    border-radius: 8px;
+    border: none;
+
+    height: 1.5em;
+
+    background-color: rgba(255, 255, 255, 0.737);
+    color: rgb(79, 79, 79);
+
+    &:focus,
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+      transition: 1s;
+    }
+  }
+
+  i {
+    color: whitesmoke;
+  }
+
+  h5,
+  button,
+  i {
+    justify-content: center;
+    text-align: center;
+  }
+}

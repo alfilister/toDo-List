@@ -1,0 +1,16 @@
+// roots
+
+@use "./Styles/root/normalize";
+
+// components
+
+@use "./Styles/components/addBar";
+@use "./Styles/components/filter";
+@use "./Styles/components/list";
+@use "./Styles/components/sort";
+@use "./Styles/components/tabList";
+
+// pages
+
+@use "./Styles/Pages/home";
+@use "./Styles/Pages/landing";

@@ -7,7 +7,8 @@ function Filter({ setFilter }) {
   };
 
   return (
-    <div>
+    <div className="filter">
+      <h3>Filter by status</h3>
       <button name="Active" onClick={(e) => handleFilter(e)}>
         Active
       </button>

@@ -1,0 +1,26 @@
+.sort {
+  display: flex;
+  flex-direction: wrap;
+
+  h3 {
+    font-family: "Dancing Script", cursive;
+    font-size: 2em;
+    color: whitesmoke;
+    text-align: center;
+    padding-bottom: 0.2em;
+    margin-right: 0.5em;
+    margin-top: 0;
+  }
+
+  select {
+    border-radius: 8px;
+    border: none;
+    margin: 0.5em 0.2em;
+
+    width: max-content;
+    height: 1.5em;
+
+    background-color: rgba(255, 255, 255, 0.737);
+    color: rgb(79, 79, 79);
+  }
+}

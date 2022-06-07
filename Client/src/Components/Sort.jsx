@@ -7,7 +7,8 @@ function Sort({ setSort, sort }) {
   };
 
   return (
-    <div>
+    <div className="sort">
+      <h3>Sort by priority</h3>
       <select value={sort} onChange={(e) => handleSort(e)}>
         <option disabled>Sort</option>
         <option value={"Asc"}>Asc</option>

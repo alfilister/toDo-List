@@ -28,7 +28,7 @@ function AddBar() {
   };
 
   return (
-    <div>
+    <div className="addBar">
       <input
         type="text"
         name="task"
