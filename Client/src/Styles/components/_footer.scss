@@ -1,0 +1,32 @@
+.footerBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    color: whitesmoke;
+
+    span {
+      color: rgb(238, 0, 255);
+      margin: 0 0.2em;
+    }
+  }
+
+  .contactIcons {
+    margin-left: 1em;
+    i {
+      color: whitesmoke;
+      font-size: 1.5em;
+      margin: 0 0.5em;
+
+      &:hover {
+        cursor: pointer;
+        color: rgb(198, 198, 198);
+      }
+      &:active {
+        color: rgba(245, 245, 245, 0);
+      }
+    }
+  }
+}
