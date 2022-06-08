@@ -1,12 +1,11 @@
 import React from "react";
 import TabList from "./TabList";
 
-function List({ tasks, setTasks, filter, sort }) {
+function List({ tasks, filter, sort, setSort }) {
   const preShow =
     filter === "All" ? tasks : tasks.filter((el) => el.status === filter);
 
   const toShow =
-    (sort === "Sort" && preShow) ||
     (sort === "Asc" &&
       preShow.sort((a, b) => {
         if (a.priority > b.priority) {
@@ -34,11 +33,27 @@ function List({ tasks, setTasks, filter, sort }) {
         return 0;
       }));
 
+  const handleSortPriority = (e) => {
+    e.preventDefault();
+    if (sort === "Asc") {
+      setSort("Des");
+    } else {
+      setSort("Asc");
+    }
+  };
+
   return (
     <div className="list">
       <header>
         <h6>Activities</h6>
-        <h6>Priority</h6>
+
+        <div className="priority">
+          <h6>Priority</h6>
+          <i
+            class="fa-solid fa-arrows-up-down"
+            onClick={(e) => handleSortPriority(e)}
+          ></i>
+        </div>
         <h6>Status</h6>
         <h6>Delete</h6>
       </header>

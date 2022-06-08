@@ -6,7 +6,23 @@
 
   header {
     display: grid;
-    grid-template-columns: 30% 20% 20% 20%;
+    grid-template-columns: 50% 20% 20% 10%;
+
+    .priority {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i {
+        color: whitesmoke;
+
+        &:hover {
+          cursor: pointer;
+        }
+        &:active {
+          color: rgba(245, 245, 245, 0.2);
+        }
+      }
+    }
 
     h6 {
       font-family: "Dancing Script", cursive;
@@ -19,6 +35,10 @@
 
   .tabsTasks {
     height: 30vh;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: rgba(255, 255, 255, 0.073);
+    border-radius: 15px;
     overflow-y: scroll;
   }
 

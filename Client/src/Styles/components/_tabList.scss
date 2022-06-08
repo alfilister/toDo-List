@@ -1,6 +1,6 @@
 .tabList {
   display: grid;
-  grid-template-columns: 30% 20% 20% 20%;
+  grid-template-columns: 50% 20% 20% 10%;
   align-items: center;
 
   height: 3em;
@@ -16,6 +16,16 @@
     color: whitesmoke;
     text-align: center;
     margin: 0 0.5em 0 0;
+  }
+
+  .flags {
+    display: flex;
+    align-items: center;
+    padding-left: 0.5em;
+
+    i {
+      margin: 0 0.05em;
+    }
   }
 
   button {

@@ -18,10 +18,22 @@ function TabList({ task }) {
     dispatch(deleteTask(task.id));
   };
 
+  var counter = [];
+
+  for (let index = 0; index < Number(task.priority); index++) {
+    counter.push("flag");
+  }
+
   return (
     <div className="tabList">
       <h5>{task.task}</h5>
-      <h5>{task.priority}</h5>
+
+      <div className="flags">
+        {counter.map(() => (
+          <i class="fa-solid fa-circle-exclamation"></i>
+        ))}
+      </div>
+
       <button onClick={(e) => handleCheck(e)} type="checkbox">
         {task.status === "Active" ? "Complete" : "Restore"}
       </button>

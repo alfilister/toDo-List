@@ -15,18 +15,15 @@ function Home() {
 
   const tasks = useSelector((state) => state.tasks);
 
-  const [sort, setSort] = useState("Sort");
+  const [sort, setSort] = useState("Asc");
   const [filter, setFilter] = useState("All");
-
-  var counter = tasks.length + 1;
 
   return (
     <div className="home">
       <h1>2do List</h1>
       <AddBar />
       <Filter setFilter={setFilter} />
-      <Sort sort={sort} setSort={setSort} />
-      <List tasks={tasks} filter={filter} sort={sort} />
+      <List sort={sort} setSort={setSort} tasks={tasks} filter={filter} />
     </div>
   );
 }
