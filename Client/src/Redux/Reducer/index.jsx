@@ -1,7 +1,14 @@
-import { GET_TASKS, ADD_TASK, MODIFY_TASK, DELETE_TASK } from "../Actions";
+import {
+  GET_TASKS,
+  ADD_TASK,
+  MODIFY_TASK,
+  DELETE_TASK,
+  LOGGIN_STATUS,
+} from "../Actions";
 
 const initialState = {
   tasks: [],
+  loggin: null,
 };
 
 function rootReducer(state = initialState, action) {
@@ -51,6 +58,19 @@ function rootReducer(state = initialState, action) {
         ...state,
         tasks: newList,
       };
+
+    case LOGGIN_STATUS:
+      if (!loggin) {
+        return {
+          ...state,
+          loggin: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          loggin: null,
+        };
+      }
 
     default:
       return state;
