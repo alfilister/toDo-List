@@ -8,15 +8,15 @@ function Footer() {
       </h4>
       <div className="contactIcons">
         <i
-          class="fa-brands fa-github"
+          className="fa-brands fa-github"
           onClick={() => window.open("https://github.com/alfilister", "_blank")}
         ></i>
         <i
-          class="fa-brands fa-telegram"
+          className="fa-brands fa-telegram"
           onClick={() => window.open("https://t.me/JayMario", "_blank")}
         ></i>
         <i
-          class="fa-brands fa-linkedin"
+          className="fa-brands fa-linkedin"
           onClick={() =>
             window.open("https://www.linkedin.com/in/jota-castillo/", "_blank")
           }

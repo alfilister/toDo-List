@@ -6,17 +6,39 @@ import Tutorial from "../Components/Tutorial";
 
 import firebaseApp from "../Firebase/credenciales";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { logginStatus } from "../Redux/Actions";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { logginStatus, logoutStatus, setUserInfo } from "../Redux/Actions";
 const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
 
 function Landing() {
   const logged = useSelector((state) => state.loggin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const getAditionalinfo = async (uid) => {
+    const docuRef = doc(firestore, `/users/${uid}`);
+    const docu = await getDoc(docuRef);
+    const response = docu.data();
+    return response;
+  };
+
   onAuthStateChanged(auth, (firebaseUser) => {
     if (firebaseUser) {
-      dispatch(logginStatus(firebaseUser));
+      getAditionalinfo(firebaseUser.uid).then((info) => {
+        dispatch(
+          setUserInfo({
+            uid: firebaseUser.uid,
+            email: firebaseUser.email,
+            nickname: info.nickname,
+            role: info.role,
+          })
+        );
+      });
+
+      dispatch(logginStatus());
+    } else {
+      dispatch(logoutStatus());
     }
   });
 

@@ -4,11 +4,14 @@ import {
   MODIFY_TASK,
   DELETE_TASK,
   LOGGIN_STATUS,
+  LOGOUT_STATUS,
+  SET_USER_INFO,
 } from "../Actions";
 
 const initialState = {
   tasks: [],
-  loggin: null,
+  loggin: false,
+  userInfo: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -60,17 +63,23 @@ function rootReducer(state = initialState, action) {
       };
 
     case LOGGIN_STATUS:
-      if (!loggin) {
-        return {
-          ...state,
-          loggin: action.payload,
-        };
-      } else {
-        return {
-          ...state,
-          loggin: null,
-        };
-      }
+      return {
+        ...state,
+        loggin: true,
+      };
+
+    case LOGOUT_STATUS:
+      return {
+        ...state,
+        loggin: false,
+        userInfo: false,
+      };
+
+    case SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
 
     default:
       return state;

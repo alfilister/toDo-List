@@ -4,10 +4,16 @@ import AddBar from "../Components/AddBar";
 import Filter from "../Components/Filter";
 import Footer from "../Components/Footer";
 import List from "../Components/List";
-import { getTasks } from "../Redux/Actions";
+import { getTasks, logoutStatus } from "../Redux/Actions";
+import firebaseApp from "../Firebase/credenciales";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+const auth = getAuth(firebaseApp);
 
 function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getTasks());
@@ -18,8 +24,16 @@ function Home() {
   const [sort, setSort] = useState("Asc");
   const [filter, setFilter] = useState("All");
 
+  const handleLogout = (e) => {
+    e.preventDefault;
+    signOut(auth);
+    dispatch(logoutStatus());
+    navigate("/");
+  };
+
   return (
     <div className="home">
+      <button onClick={(e) => handleLogout(e)}>Logout</button>
       <h1>2do List</h1>
       <AddBar />
       <Filter setFilter={setFilter} />

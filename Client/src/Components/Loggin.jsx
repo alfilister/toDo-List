@@ -1,20 +1,49 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import firebaseApp from "../Firebase/credenciales";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+const auth = getAuth(firebaseApp);
+const firestore = getFirestore(firebaseApp);
 
 function Loggin() {
-  const logged = useSelector((state) => state.loggin);
-
-  const [signUp, setSignUp] = useState(false);
+  const [signingUp, setSigningUp] = useState(false);
   const [input, setInput] = useState({
+    nickname: "",
     email: "",
     password: "",
     role: "select",
   });
 
+  const registerUser = async (nickname, email, password, role) => {
+    const infoUser = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    ).then((firebaseUser) => {
+      return firebaseUser;
+    });
+
+    const docuRef = doc(firestore, `/users/${infoUser.user.uid}`);
+    setDoc(docuRef, { nickname, email, password, role });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!signingUp) {
+      registerUser(input.nickname, input.email, input.password, input.role);
+      signInWithEmailAndPassword(auth, input.email, input.password);
+    } else {
+      signInWithEmailAndPassword(auth, input.email, input.password);
+    }
+
     setInput({
+      nickname: "",
       email: "",
       password: "",
       role: "select",
@@ -38,12 +67,24 @@ function Loggin() {
 
   return (
     <div>
-      <h1>{!signUp ? "Sign Up" : "Loggin"}</h1>
-      <button onClick={() => setSignUp(!signUp)}>
-        {signUp ? "I want to Sign Up" : "I already have an account"}
+      <h1>{!signingUp ? "Sign Up" : "Loggin"}</h1>
+      <button onClick={() => setSigningUp(!signingUp)}>
+        {signingUp ? "I want to Sign Up" : "I already have an account"}
       </button>
-
       <form onSubmit={(e) => handleSubmit(e)}>
+        {!signingUp && (
+          <label>
+            nickname:
+            <input
+              type="text"
+              // id="nickname"
+              name="nickname"
+              value={input.nickname}
+              placeholder="How do you want us to call you?"
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
+        )}
         <label>
           E-mail:
           <input
@@ -51,7 +92,7 @@ function Loggin() {
             // id="email"
             name="email"
             value={input.email}
-            placeholder="example@mail.io"
+            placeholder="example@mail.ex"
             onChange={(e) => handleChange(e)}
           />
         </label>
@@ -66,7 +107,7 @@ function Loggin() {
           />
         </label>
 
-        {!signUp && (
+        {!signingUp && (
           <label>
             Role:
             <select
@@ -81,7 +122,7 @@ function Loggin() {
             </select>
           </label>
         )}
-        <input type="submit" value={!signUp ? "Sign Up" : "Loggin"} />
+        <input type="submit" value={!signingUp ? "Sign Up" : "Loggin"} />
       </form>
     </div>
   );

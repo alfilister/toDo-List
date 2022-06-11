@@ -24,13 +24,15 @@ function TabList({ task }) {
     counter.push("flag");
   }
 
+  var idSetter = 0;
+
   return (
     <div className="tabList">
       <h5>{task.task}</h5>
 
       <div className="flags">
         {counter.map(() => (
-          <i class="fa-solid fa-circle-exclamation"></i>
+          <i className="fa-solid fa-circle-exclamation" key={++idSetter}></i>
         ))}
       </div>
 

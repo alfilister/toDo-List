@@ -3,6 +3,8 @@ export const ADD_TASK = "ADD_TASK";
 export const MODIFY_TASK = "MODIFY_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const LOGGIN_STATUS = "LOGGIN_STATUS";
+export const LOGOUT_STATUS = "LOGOUT_STATUS";
+export const SET_USER_INFO = "SET_USER_INFO";
 
 var tasks = [
   { id: 1, task: "Active task", priority: "5", status: "Active" },
@@ -75,11 +77,31 @@ export function deleteTask(payload) {
   }
 }
 
-export function logginStatus(firebaseUser) {
+export function logginStatus() {
   try {
     return {
       type: LOGGIN_STATUS,
-      payload: firebaseUser
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function logoutStatus() {
+  try {
+    return {
+      type: LOGOUT_STATUS,
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function setUserInfo(payload) {
+  try {
+    return {
+      type: SET_USER_INFO,
+      payload: payload,
     };
   } catch (err) {
     console.log(err);

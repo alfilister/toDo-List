@@ -50,7 +50,7 @@ function List({ tasks, filter, sort, setSort }) {
         <div className="priority">
           <h6>Priority</h6>
           <i
-            class="fa-solid fa-arrows-up-down"
+            className="fa-solid fa-arrows-up-down"
             onClick={(e) => handleSortPriority(e)}
           ></i>
         </div>
