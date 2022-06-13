@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask } from "../Redux/Actions";
-import Swal from "sweetalert";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import "sweetalert2/src/sweetalert2.scss"; // Don't forget to import the styles!
+const MySwal = withReactContent(Swal);
 
 const validate = (input) => {
   let errors = {};
@@ -40,9 +44,9 @@ function AddBar() {
   const handleBtn = (e) => {
     e.preventDefault();
     if (!input.task || input.priority === "Priority" || errors.task) {
-      Swal(
+      MySwal.fire(
         "Missing info",
-        "Set an Activity name and a Priority to proceed",
+        "Set an Activity name and a Priority level to proceed",
         "warning"
       );
     } else {

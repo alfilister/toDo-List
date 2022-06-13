@@ -41,6 +41,7 @@
     &:hover {
       background-color: rgba(255, 255, 255, 1);
       transition: 1s;
+      cursor: pointer;
     }
   }
 
@@ -53,6 +54,13 @@
   i {
     justify-content: center;
     text-align: center;
+  }
+
+  button,
+  i {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
