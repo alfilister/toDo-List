@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteTask, modifyTask } from "../Redux/Actions";
 
-function TabList({ task }) {
+function TabList({ task, logginStatus, userRole }) {
   const dispatch = useDispatch();
+
+  const proFeature = (logginStatus, userRole) => {
+    if (logginStatus && userRole === "pro") {
+      return <i class="fa-solid fa-pen-to-square"></i>;
+    }
+  };
 
   const handleCheck = (e) => {
     task.status === "Active"
@@ -27,7 +33,7 @@ function TabList({ task }) {
   var idSetter = 0;
 
   return (
-    <div className="tabList">
+    <div className={userRole === "pro" ? "tabListPro" : "tabList"}>
       <h5>{task.task}</h5>
 
       <div className="flags">
@@ -36,9 +42,12 @@ function TabList({ task }) {
         ))}
       </div>
 
-      <button onClick={(e) => handleCheck(e)} type="checkbox">
+      <button onClick={(e) => handleCheck(e)}>
         {task.status === "Active" ? "Complete" : "Restore"}
       </button>
+
+      {proFeature(logginStatus, userRole)}
+
       <i className="fa-solid fa-trash-can" onClick={(e) => handleTrash(e)}></i>
     </div>
   );

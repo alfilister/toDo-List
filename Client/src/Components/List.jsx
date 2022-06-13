@@ -1,7 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import TabList from "./TabList";
 
 function List({ tasks, filter, sort, setSort }) {
+  const userRole = useSelector((state) => state.userInfo.role);
+  const logginStatus = useSelector((state) => state.loggin);
+
+  const proFeature = (logginStatus, userRole) => {
+    if (logginStatus && userRole === "pro") {
+      return <h6>Detail</h6>;
+    }
+  };
+
   const preShow =
     filter === "All" ? tasks : tasks.filter((el) => el.status === filter);
 
@@ -44,7 +54,7 @@ function List({ tasks, filter, sort, setSort }) {
 
   return (
     <div className="list">
-      <header>
+      <header className={userRole === "pro" ? "headerPro" : "header"}>
         <h6>Activities</h6>
 
         <div className="priority">
@@ -55,11 +65,19 @@ function List({ tasks, filter, sort, setSort }) {
           ></i>
         </div>
         <h6>Status</h6>
+
+        {proFeature(logginStatus, userRole)}
+
         <h6>Delete</h6>
       </header>
       <div className="tabsTasks">
         {toShow.map((el) => (
-          <TabList task={el} key={el.id} />
+          <TabList
+            task={el}
+            key={el.id}
+            logginStatus={logginStatus}
+            userRole={userRole}
+          />
         ))}
       </div>
       <div>

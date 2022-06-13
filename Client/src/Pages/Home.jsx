@@ -20,6 +20,7 @@ function Home() {
   }, []);
 
   const tasks = useSelector((state) => state.tasks);
+  const logginStatus = useSelector((state) => state.loggin);
 
   const [sort, setSort] = useState("Asc");
   const [filter, setFilter] = useState("All");
@@ -33,7 +34,12 @@ function Home() {
 
   return (
     <div className="home">
-      <button onClick={(e) => handleLogout(e)}>Logout</button>
+      {logginStatus ? (
+        <button onClick={(e) => handleLogout(e)}>Logout</button>
+      ) : (
+        <button onClick={() => navigate("/")}>Sign Up</button>
+      )}
+
       <h1>2do List</h1>
       <AddBar />
       <Filter setFilter={setFilter} />

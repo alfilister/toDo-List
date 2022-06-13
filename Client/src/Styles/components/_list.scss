@@ -4,7 +4,7 @@
 
   width: 600px;
 
-  header {
+  .header {
     display: grid;
     grid-template-columns: 50% 20% 20% 10%;
 
@@ -31,6 +31,11 @@
       text-align: center;
       margin: 0 0.5em 0 0;
     }
+  }
+
+  .headerPro {
+    @extend .header;
+    grid-template-columns: 40% 20% 15% 15% 10%;
   }
 
   .tabsTasks {

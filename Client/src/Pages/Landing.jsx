@@ -42,12 +42,7 @@ function Landing() {
     }
   });
 
-  return (
-    <div>
-      <button onClick={() => navigate("home")}>Take your notes</button>
-      {logged ? <DailyTasks /> : <Tutorial />}
-    </div>
-  );
+  return <div>{logged ? <DailyTasks /> : <Tutorial />}</div>;
 }
 
 export default Landing;

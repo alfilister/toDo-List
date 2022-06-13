@@ -55,3 +55,8 @@
     text-align: center;
   }
 }
+
+.tabListPro {
+  @extend .tabList;
+  grid-template-columns: 40% 20% 15% 15% 10%;
+}

@@ -118,7 +118,7 @@ function Loggin() {
             >
               <option disabled>select</option>
               <option value="pro">proUser</option>
-              <option value="guest">guest</option>
+              <option value="basic">basic</option>
             </select>
           </label>
         )}
