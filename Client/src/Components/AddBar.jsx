@@ -17,6 +17,11 @@ const validate = (input) => {
   return errors;
 };
 
+const date = new Date();
+const dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+  .toISOString()
+  .slice(0, 10);
+
 function AddBar() {
   const dispatch = useDispatch();
 
@@ -50,7 +55,16 @@ function AddBar() {
         "warning"
       );
     } else {
-      dispatch(addTask({ task: input.task.trim(), priority: input.priority }));
+      dispatch(
+        addTask({
+          task: input.task.trim(),
+          priority: input.priority,
+          createdAt: dateString,
+          timeLimit: "not defined",
+          setAlert: false,
+          details: "...",
+        })
+      );
       setInput({
         task: "",
         priority: "Priority",

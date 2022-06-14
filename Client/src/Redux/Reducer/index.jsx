@@ -2,6 +2,7 @@ import {
   GET_TASKS,
   ADD_TASK,
   MODIFY_TASK,
+  EDIT_TASK,
   DELETE_TASK,
   LOGGIN_STATUS,
   LOGOUT_STATUS,
@@ -50,6 +51,30 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         tasks: modifiedTasks,
+      };
+
+    case EDIT_TASK:
+      const { id, task, priority, createdAt, timeLimit, setAlert, details } =
+        action.payload;
+
+      const filterTask = state.tasks.filter((el) => el.id === id);
+
+      filterTask[0].task = task;
+      filterTask[0].priority = priority;
+      filterTask[0].createdAt = createdAt;
+      filterTask[0].timeLimit = timeLimit;
+      filterTask[0].setAlert = setAlert;
+      filterTask[0].details = details;
+
+      const taskNoModify = state.tasks.filter((el) => el.id !== id);
+
+      const modifyTasks = [...taskNoModify, ...filterTask];
+
+      window.localStorage.setItem("tasksLocal", JSON.stringify(modifyTasks));
+
+      return {
+        ...state,
+        tasks: modifyTasks,
       };
 
     case DELETE_TASK:

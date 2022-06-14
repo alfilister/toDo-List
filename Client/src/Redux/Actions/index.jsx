@@ -1,6 +1,7 @@
 export const GET_TASKS = "GET_TASKS";
 export const ADD_TASK = "ADD_TASK";
 export const MODIFY_TASK = "MODIFY_TASK";
+export const EDIT_TASK = "EDIT_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const LOGGIN_STATUS = "LOGGIN_STATUS";
 export const LOGOUT_STATUS = "LOGOUT_STATUS";
@@ -37,7 +38,14 @@ export function getTasks() {
   }
 }
 
-export function addTask({ task, priority }) {
+export function addTask({
+  task,
+  priority,
+  createdAt,
+  timeLimit,
+  setAlert,
+  details,
+}) {
   try {
     idCounter++;
 
@@ -48,6 +56,10 @@ export function addTask({ task, priority }) {
         task,
         priority,
         status: "Active",
+        createdAt,
+        timeLimit,
+        setAlert,
+        details,
       },
     };
   } catch (err) {
@@ -59,6 +71,17 @@ export function modifyTask(payload) {
   try {
     return {
       type: MODIFY_TASK,
+      payload,
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function editTask(payload) {
+  try {
+    return {
+      type: EDIT_TASK,
       payload,
     };
   } catch (err) {
