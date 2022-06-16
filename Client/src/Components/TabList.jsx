@@ -35,6 +35,17 @@ function TabList({ task, logginStatus, userRole }) {
       : (task.taskStatus = "Active");
 
     dispatch(modifyTask(task.id));
+
+    if (userRole === "pro" || userRole === "basic") {
+      const docuRef = doc(firestore, `/users/${uid}`);
+      setDoc(
+        docuRef,
+        {
+          tasks: tasksState,
+        },
+        { merge: true }
+      );
+    }
   };
 
   const handleEdit = (e) => {
@@ -63,30 +74,36 @@ function TabList({ task, logginStatus, userRole }) {
           html: `
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Task Name</label>
-          <input style="margin-top:0.5em" type="text"  name=${task.task} id="taskName" placeholder=${task.task} class="swal2-input">
+          <input style="margin-top:0.5em" type="text"  name='taskName' id="taskName" placeholder=${task.task} value=${task.task} class="swal2-input">
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Priority</label>
-          <input style="margin-top:0.5em" type="number" name=${task.priority} id="priority" placeholder=${task.priority} class="swal2-input"> 
+          <input style="margin-top:0.5em" type="number" max='5' min='1' name='priority' id="priority" placeholder=${task.priority} value=${task.priority} class="swal2-input"> 
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Time limit</label>
-          <input style="margin-top:0.5em" type="date" name=${task.timeLimit} id="timeLimit" placeholder=${task.timeLimit} class="swal2-input">
+          <input style="margin-top:0.5em" type="date" name='timeLimit' id="timeLimit" value=${task.timeLimit} class="swal2-input">
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
-          <label style="margin: 1em auto auto 2.3em">Set alert</label>
-          <select style="margin-top:0.5em" name=${task.setAlert} id="setAlert" placeholder=${task.setAlert} class="swal2-select">
-          <option value='true'> true </option>
-          <option value='false'> false </option>
+          <label style="margin: 1em auto auto 2.3em">Set alert: ${task.setAlert}</label>
+          <select value=${task.setAlert} style="margin-top:0.5em" name='setAlert' id="setAlert" class="swal2-select">
+
+          <option {
+            task.setAlert === "of course" && selected
+          }> of course </option>
+          <option {
+            task.setAlert === "don't needed" && selected
+          }> don't needed </option>
+
           </select>
 
           </div>
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Details</label>
-          <input style="margin-top:0.5em" type="textArea" name=${task.details} id="details" placeholder=${task.details} class="swal2-input">
+          <input style="margin-top:0.5em" type="textArea" name='details' id="details" placeholder=${task.details} value=${task.details} class="swal2-input">
           </div>`,
 
           confirmButtonText: "Confirm modifications",
@@ -110,14 +127,28 @@ function TabList({ task, logginStatus, userRole }) {
             dispatch(
               editTask({
                 id: task.id,
-                task: formTask || task.task,
-                priority: formPriority || task.priority,
+                task: formTask,
+                priority:
+                  (formPriority > 5 && 5) ||
+                  (formPriority < 1 && 1) ||
+                  (formPriority > 0 && formPriority < 6 && formPriority),
                 createdAt: task.createdAt,
-                timeLimit: formTimeLimit || task.timeLimit,
-                setAlert: formSetAlert || task.setAlert,
-                details: formDetails || task.details,
+                timeLimit: formTimeLimit,
+                setAlert: formSetAlert,
+                details: formDetails,
               })
             );
+
+            if (userRole === "pro" || userRole === "basic") {
+              const docuRef = doc(firestore, `/users/${uid}`);
+              setDoc(
+                docuRef,
+                {
+                  tasks: tasksState,
+                },
+                { merge: true }
+              );
+            }
           },
         });
       }

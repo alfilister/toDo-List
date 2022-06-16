@@ -65,18 +65,32 @@ function AddBar() {
         "warning"
       );
     } else {
-      const taskCounter = tasksFirestore
-        ? tasksFirestore.length + 1
-        : taskStorage.length + 1;
+      function calcTaskCounter() {
+        if (tasksFirestore) {
+          const tasksFirestoreIds = tasksFirestore.map((el) => el.id);
+          if (tasksFirestoreIds.length) {
+            return Math.max(...tasksFirestoreIds) + 1;
+          } else {
+            return 1;
+          }
+        } else {
+          const tasksStorageIds = taskStorage.map((el) => el.id);
+          if (tasksStorageIds.length) {
+            return Math.max(...tasksStorageIds) + 1;
+          } else {
+            return 1;
+          }
+        }
+      }
 
       const taskToSend = {
-        id: taskCounter,
+        id: calcTaskCounter(),
         task: input.task.trim(),
         priority: input.priority,
         taskStatus: "Active",
         createdAt: dateString,
-        timeLimit: "not defined",
-        setAlert: false,
+        timeLimit: "not-defined",
+        setAlert: "don't needed",
         details: "...",
       };
       dispatch(addTask(taskToSend));
