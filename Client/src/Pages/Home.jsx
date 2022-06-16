@@ -34,11 +34,9 @@ function Home() {
 
   return (
     <div className="home">
-      {logginStatus ? (
-        <button onClick={(e) => handleLogout(e)}>Logout</button>
-      ) : (
-        <button onClick={() => navigate("/")}>Sign Up</button>
-      )}
+      <button onClick={(e) => handleLogout(e)}>
+        {logginStatus ? "Logout" : "Sign Up"}
+      </button>
 
       <h1>2do List</h1>
       <AddBar />

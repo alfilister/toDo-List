@@ -23,25 +23,27 @@ function Landing() {
     return response;
   };
 
-  onAuthStateChanged(auth, (firebaseUser) => {
-    if (firebaseUser) {
-      getAditionalinfo(firebaseUser.uid).then((info) => {
-        dispatch(
-          setUserInfo({
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            nickname: info.nickname,
-            role: info.role,
-            tasks: info.tasks,
-          })
-        );
-      });
+  if (logged) {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        getAditionalinfo(firebaseUser.uid).then((info) => {
+          dispatch(
+            setUserInfo({
+              uid: firebaseUser.uid,
+              email: firebaseUser.email,
+              nickname: info.nickname,
+              role: info.role,
+              tasks: info.tasks,
+            })
+          );
+        });
 
-      dispatch(logginStatus());
-    } else {
-      dispatch(logoutStatus());
-    }
-  });
+        dispatch(logginStatus());
+      } else {
+        dispatch(logoutStatus());
+      }
+    });
+  }
 
   return <div>{logged ? <DailyTasks /> : <Tutorial />}</div>;
 }

@@ -13,7 +13,7 @@ function Filter({ setFilter }) {
         Active
       </button>
       <button name="Done" onClick={(e) => handleFilter(e)}>
-        Completed
+        Done
       </button>
       <button name="All" onClick={(e) => handleFilter(e)}>
         All

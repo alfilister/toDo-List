@@ -29,6 +29,7 @@ const dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
 function AddBar() {
   const uid = useSelector((state) => state.userInfo.uid);
   const tasksFirestore = useSelector((state) => state.userInfo.tasks);
+  const taskStorage = useSelector((state) => state.tasks);
   const userRole = useSelector((state) => state.userInfo.role);
   const dispatch = useDispatch();
 
@@ -64,11 +65,15 @@ function AddBar() {
         "warning"
       );
     } else {
-      const taskCounter = tasksFirestore.length + 1;
+      const taskCounter = tasksFirestore
+        ? tasksFirestore.length + 1
+        : taskStorage.length + 1;
+
       const taskToSend = {
         id: taskCounter,
         task: input.task.trim(),
         priority: input.priority,
+        taskStatus: "Active",
         createdAt: dateString,
         timeLimit: "not defined",
         setAlert: false,
@@ -76,16 +81,18 @@ function AddBar() {
       };
       dispatch(addTask(taskToSend));
 
-      tasksFirestore && tasksFirestore.push(taskToSend);
+      if (userRole === "pro" || userRole === "basic") {
+        tasksFirestore && tasksFirestore.push(taskToSend);
 
-      const docuRef = doc(firestore, `/users/${uid}`);
-      setDoc(
-        docuRef,
-        {
-          tasks: tasksFirestore ? tasksFirestore : [taskToSend],
-        },
-        { merge: true }
-      );
+        const docuRef = doc(firestore, `/users/${uid}`);
+        setDoc(
+          docuRef,
+          {
+            tasks: tasksFirestore ? tasksFirestore : [taskToSend],
+          },
+          { merge: true }
+        );
+      }
 
       setInput({
         task: "",

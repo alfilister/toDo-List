@@ -6,11 +6,14 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { logginStatus } from "../Redux/Actions";
+import { useDispatch } from "react-redux";
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 function Loggin() {
+  const dispatch = useDispatch();
   const [signingUp, setSigningUp] = useState(false);
   const [input, setInput] = useState({
     nickname: "",
@@ -45,8 +48,10 @@ function Loggin() {
         input.tasks
       );
       signInWithEmailAndPassword(auth, input.email, input.password);
+      dispatch(logginStatus());
     } else {
       signInWithEmailAndPassword(auth, input.email, input.password);
+      dispatch(logginStatus());
     }
 
     setInput({

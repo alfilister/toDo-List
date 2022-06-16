@@ -13,7 +13,7 @@ function List({ tasks, filter, sort, setSort }) {
   };
 
   const preShow =
-    filter === "All" ? tasks : tasks.filter((el) => el.status === filter);
+    filter === "All" ? tasks : tasks.filter((el) => el.taskStatus === filter);
 
   const toShow =
     (sort === "Asc" &&

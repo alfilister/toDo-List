@@ -8,8 +8,8 @@ export const LOGOUT_STATUS = "LOGOUT_STATUS";
 export const SET_USER_INFO = "SET_USER_INFO";
 
 var tasks = [
-  { id: 1, task: "Active task", priority: "5", status: "Active" },
-  { id: 2, task: "Completed task", priority: "3", status: "Done" },
+  { id: 1, task: "Active task", priority: "5", taskStatus: "Active" },
+  { id: 2, task: "Completed task", priority: "3", taskStatus: "Done" },
 ];
 
 const localStorageTasks = window.localStorage.getItem("tasksLocal");
@@ -42,6 +42,7 @@ export function addTask({
   id,
   task,
   priority,
+  taskStatus,
   createdAt,
   timeLimit,
   setAlert,
@@ -56,7 +57,7 @@ export function addTask({
         id,
         task,
         priority,
-        status: "Active",
+        taskStatus,
         createdAt,
         timeLimit,
         setAlert,

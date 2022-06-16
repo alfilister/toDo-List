@@ -44,8 +44,8 @@ function rootReducer(state = initialState, action) {
 
     case MODIFY_TASK:
       const filteredTask = state.tasks.filter((el) => el.id === action.payload);
-      filteredTask.status =
-        filteredTask.status === "Active" ? "Done" : "Active";
+      filteredTask.taskStatus =
+        filteredTask.taskStatus === "Active" ? "Done" : "Active";
 
       const taskWithoutModify = state.tasks.filter(
         (el) => el.id !== action.payload

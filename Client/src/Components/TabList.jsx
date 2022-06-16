@@ -30,9 +30,9 @@ function TabList({ task, logginStatus, userRole }) {
   };
 
   const handleCheck = (e) => {
-    task.status === "Active"
-      ? (task.status = "Done")
-      : (task.status = "Active");
+    task.taskStatus === "Active"
+      ? (task.taskStatus = "Done")
+      : (task.taskStatus = "Active");
 
     dispatch(modifyTask(task.id));
   };
@@ -128,30 +128,32 @@ function TabList({ task, logginStatus, userRole }) {
     e.preventDefault();
     dispatch(deleteTask(task.id));
 
-    const docuRef = doc(firestore, `/users/${uid}`);
-    setDoc(
-      docuRef,
-      {
-        tasks: tasksState.filter((el) => el.id !== task.id),
-      },
-      { merge: true }
-    );
+    if (uid) {
+      const docuRef = doc(firestore, `/users/${uid}`);
+      setDoc(
+        docuRef,
+        {
+          tasks: tasksState.filter((el) => el.id !== task.id),
+        },
+        { merge: true }
+      );
 
-    onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        getAditionalinfo(firebaseUser.uid).then((info) => {
-          dispatch(
-            setUserInfo({
-              uid: firebaseUser.uid,
-              email: firebaseUser.email,
-              nickname: info.nickname,
-              role: info.role,
-              tasks: info.tasks,
-            })
-          );
-        });
-      }
-    });
+      onAuthStateChanged(auth, (firebaseUser) => {
+        if (firebaseUser) {
+          getAditionalinfo(firebaseUser.uid).then((info) => {
+            dispatch(
+              setUserInfo({
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                nickname: info.nickname,
+                role: info.role,
+                tasks: info.tasks,
+              })
+            );
+          });
+        }
+      });
+    }
   };
 
   var counter = [];
@@ -173,7 +175,7 @@ function TabList({ task, logginStatus, userRole }) {
       </div>
 
       <button onClick={(e) => handleCheck(e)}>
-        {task.status === "Active" ? "Complete" : "Restore"}
+        {task.taskStatus === "Active" ? "Active" : "Done"}
       </button>
 
       {proFeature(logginStatus, userRole)}
