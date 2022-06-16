@@ -17,9 +17,10 @@ function Loggin() {
     email: "",
     password: "",
     role: "select",
+    tasks: [],
   });
 
-  const registerUser = async (nickname, email, password, role) => {
+  const registerUser = async (nickname, email, password, role, tasks) => {
     const infoUser = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -29,14 +30,20 @@ function Loggin() {
     });
 
     const docuRef = doc(firestore, `/users/${infoUser.user.uid}`);
-    setDoc(docuRef, { nickname, email, password, role });
+    setDoc(docuRef, { nickname, email, password, role, tasks });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!signingUp) {
-      registerUser(input.nickname, input.email, input.password, input.role);
+      registerUser(
+        input.nickname,
+        input.email,
+        input.password,
+        input.role,
+        input.tasks
+      );
       signInWithEmailAndPassword(auth, input.email, input.password);
     } else {
       signInWithEmailAndPassword(auth, input.email, input.password);
@@ -47,6 +54,7 @@ function Loggin() {
       email: "",
       password: "",
       role: "select",
+      tasks: [],
     });
 
     //THIS IS JUST ANOTHER WAY TO CAPTURE THE VALUES, BUT PERSONALLY I PREFER WITH THE HANDLEcHANGE

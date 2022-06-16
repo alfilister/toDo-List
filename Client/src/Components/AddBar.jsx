@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import firebaseApp from "../Firebase/credenciales";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
 import { addTask } from "../Redux/Actions";
 
 import Swal from "sweetalert2";
@@ -23,6 +27,9 @@ const dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
   .slice(0, 10);
 
 function AddBar() {
+  const uid = useSelector((state) => state.userInfo.uid);
+  const tasksFirestore = useSelector((state) => state.userInfo.tasks);
+  const userRole = useSelector((state) => state.userInfo.role);
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({
@@ -46,6 +53,8 @@ function AddBar() {
     );
   };
 
+  const firestore = getFirestore(firebaseApp);
+
   const handleBtn = (e) => {
     e.preventDefault();
     if (!input.task || input.priority === "Priority" || errors.task) {
@@ -55,16 +64,29 @@ function AddBar() {
         "warning"
       );
     } else {
-      dispatch(
-        addTask({
-          task: input.task.trim(),
-          priority: input.priority,
-          createdAt: dateString,
-          timeLimit: "not defined",
-          setAlert: false,
-          details: "...",
-        })
+      const taskCounter = tasksFirestore.length + 1;
+      const taskToSend = {
+        id: taskCounter,
+        task: input.task.trim(),
+        priority: input.priority,
+        createdAt: dateString,
+        timeLimit: "not defined",
+        setAlert: false,
+        details: "...",
+      };
+      dispatch(addTask(taskToSend));
+
+      tasksFirestore && tasksFirestore.push(taskToSend);
+
+      const docuRef = doc(firestore, `/users/${uid}`);
+      setDoc(
+        docuRef,
+        {
+          tasks: tasksFirestore ? tasksFirestore : [taskToSend],
+        },
+        { merge: true }
       );
+
       setInput({
         task: "",
         priority: "Priority",

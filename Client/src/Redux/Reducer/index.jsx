@@ -18,10 +18,17 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TASKS:
-      return {
-        ...state,
-        tasks: action.payload,
-      };
+      if (state.loggin) {
+        return {
+          ...state,
+          tasks: state.userInfo.tasks,
+        };
+      } else {
+        return {
+          ...state,
+          tasks: action.payload,
+        };
+      }
 
     case ADD_TASK:
       const concatenateTasks = [...state.tasks, action.payload];
@@ -79,7 +86,6 @@ function rootReducer(state = initialState, action) {
 
     case DELETE_TASK:
       const newList = state.tasks.filter((el) => el.id !== action.payload);
-
       window.localStorage.setItem("tasksLocal", JSON.stringify(newList));
 
       return {
@@ -94,10 +100,12 @@ function rootReducer(state = initialState, action) {
       };
 
     case LOGOUT_STATUS:
+      window.localStorage.clear();
       return {
         ...state,
         loggin: false,
         userInfo: false,
+        tasks: [],
       };
 
     case SET_USER_INFO:

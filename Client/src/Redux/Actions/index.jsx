@@ -14,10 +14,10 @@ var tasks = [
 
 const localStorageTasks = window.localStorage.getItem("tasksLocal");
 
-var idCounter =
-  JSON.parse(localStorageTasks) !== null
-    ? JSON.parse(localStorageTasks).length
-    : 2;
+// var idCounter =
+//   JSON.parse(localStorageTasks) !== null
+//     ? JSON.parse(localStorageTasks).length
+//     : 2;
 
 export function getTasks() {
   try {
@@ -39,6 +39,7 @@ export function getTasks() {
 }
 
 export function addTask({
+  id,
   task,
   priority,
   createdAt,
@@ -47,12 +48,12 @@ export function addTask({
   details,
 }) {
   try {
-    idCounter++;
+    // idCounter++;
 
     return {
       type: ADD_TASK,
       payload: {
-        id: idCounter,
+        id,
         task,
         priority,
         status: "Active",

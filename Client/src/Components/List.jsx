@@ -74,7 +74,7 @@ function List({ tasks, filter, sort, setSort }) {
         {toShow.map((el) => (
           <TabList
             task={el}
-            key={el.id}
+            key={el.task}
             logginStatus={logginStatus}
             userRole={userRole}
           />

@@ -1,5 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import firebaseApp from "../Firebase/credenciales";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import { deleteTask, editTask, modifyTask } from "../Redux/Actions";
 
 import Swal from "sweetalert2";
@@ -9,7 +14,12 @@ import { useState } from "react";
 const MySwal = withReactContent(Swal);
 
 function TabList({ task, logginStatus, userRole }) {
+  const uid = useSelector((state) => state.userInfo.uid);
+  const tasksState = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
+
+  const firestore = getFirestore(firebaseApp);
+  const auth = getAuth(firebaseApp);
 
   const proFeature = (logginStatus, userRole) => {
     if (logginStatus && userRole === "pro") {
@@ -117,6 +127,31 @@ function TabList({ task, logginStatus, userRole }) {
   const handleTrash = (e) => {
     e.preventDefault();
     dispatch(deleteTask(task.id));
+
+    const docuRef = doc(firestore, `/users/${uid}`);
+    setDoc(
+      docuRef,
+      {
+        tasks: tasksState.filter((el) => el.id !== task.id),
+      },
+      { merge: true }
+    );
+
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        getAditionalinfo(firebaseUser.uid).then((info) => {
+          dispatch(
+            setUserInfo({
+              uid: firebaseUser.uid,
+              email: firebaseUser.email,
+              nickname: info.nickname,
+              role: info.role,
+              tasks: info.tasks,
+            })
+          );
+        });
+      }
+    });
   };
 
   var counter = [];

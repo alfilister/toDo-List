@@ -32,6 +32,7 @@ function Landing() {
             email: firebaseUser.email,
             nickname: info.nickname,
             role: info.role,
+            tasks: info.tasks,
           })
         );
       });
