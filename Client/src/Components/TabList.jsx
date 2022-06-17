@@ -10,7 +10,7 @@ import { deleteTask, editTask, modifyTask } from "../Redux/Actions";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import "sweetalert2/src/sweetalert2.scss"; // Don't forget to import the styles!
-import { useState } from "react";
+
 const MySwal = withReactContent(Swal);
 
 function TabList({ task, logginStatus, userRole }) {
@@ -48,6 +48,8 @@ function TabList({ task, logginStatus, userRole }) {
     }
   };
 
+  const dateRestriction = new Date().toISOString().split("T")[0];
+
   const handleEdit = (e) => {
     e.preventDefault();
     MySwal.fire({
@@ -84,20 +86,16 @@ function TabList({ task, logginStatus, userRole }) {
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Time limit</label>
-          <input style="margin-top:0.5em" type="date" name='timeLimit' id="timeLimit" value=${task.timeLimit} class="swal2-input">
+          <input style="margin-top:0.5em" type="date" min=${dateRestriction} name='timeLimit' id="timeLimit" value=${task.timeLimit} class="swal2-input">
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Set alert: ${task.setAlert}</label>
           <select value=${task.setAlert} style="margin-top:0.5em" name='setAlert' id="setAlert" class="swal2-select">
-
-          <option {
-            task.setAlert === "of course" && selected
-          }> of course </option>
-          <option {
-            task.setAlert === "don't needed" && selected
-          }> don't needed </option>
-
+          
+          <option disabled selected> change </option>
+          <option value="On" > On </option>
+          <option value="Off" > Off </option>
           </select>
 
           </div>
@@ -119,7 +117,10 @@ function TabList({ task, logginStatus, userRole }) {
               MySwal.getPopup().querySelector("#timeLimit").value ||
               task.timeLimit;
             const formSetAlert =
-              MySwal.getPopup().querySelector("#setAlert").value ||
+              (MySwal.getPopup().querySelector("#setAlert").value &&
+                MySwal.getPopup().querySelector("#setAlert").value !==
+                  "change" &&
+                MySwal.getPopup().querySelector("#setAlert").value) ||
               task.setAlert;
             const formDetails =
               MySwal.getPopup().querySelector("#details").value || task.details;

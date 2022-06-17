@@ -90,7 +90,7 @@ function AddBar() {
         taskStatus: "Active",
         createdAt: dateString,
         timeLimit: "not-defined",
-        setAlert: "don't needed",
+        setAlert: "Off",
         details: "...",
       };
       dispatch(addTask(taskToSend));

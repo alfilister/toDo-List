@@ -88,10 +88,18 @@ function rootReducer(state = initialState, action) {
       const newList = state.tasks.filter((el) => el.id !== action.payload);
       window.localStorage.setItem("tasksLocal", JSON.stringify(newList));
 
-      return {
-        ...state,
-        tasks: newList,
-      };
+      if (state.loggin) {
+        return {
+          ...state,
+          tasks: newList,
+          userInfo: { ...state.userInfo, tasks: newList },
+        };
+      } else {
+        return {
+          ...state,
+          tasks: newList,
+        };
+      }
 
     case LOGGIN_STATUS:
       return {
