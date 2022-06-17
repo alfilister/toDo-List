@@ -8,6 +8,7 @@ import { getTasks, logoutStatus } from "../Redux/Actions";
 import firebaseApp from "../Firebase/credenciales";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import TaskEmail from "../Components/TaskEmail";
 
 const auth = getAuth(firebaseApp);
 
@@ -42,6 +43,8 @@ function Home() {
       <AddBar />
       <Filter setFilter={setFilter} />
       <List sort={sort} setSort={setSort} tasks={tasks} filter={filter} />
+
+      <TaskEmail />
 
       <div className="footer">
         <Footer />
