@@ -172,7 +172,7 @@ function TabList({ task, logginStatus, userRole }) {
 
       onAuthStateChanged(auth, (firebaseUser) => {
         if (firebaseUser) {
-          getAditionalinfo(firebaseUser.uid).then((info) => {
+          getAditionalInfo(firebaseUser.uid).then((info) => {
             dispatch(
               setUserInfo({
                 uid: firebaseUser.uid,

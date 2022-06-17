@@ -16,7 +16,7 @@ function Landing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const getAditionalinfo = async (uid) => {
+  const getAditionalInfo = async (uid) => {
     const docuRef = doc(firestore, `/users/${uid}`);
     const docu = await getDoc(docuRef);
     const response = docu.data();
@@ -26,7 +26,7 @@ function Landing() {
   if (logged) {
     onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        getAditionalinfo(firebaseUser.uid).then((info) => {
+        getAditionalInfo(firebaseUser.uid).then((info) => {
           dispatch(
             setUserInfo({
               uid: firebaseUser.uid,
