@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@use "../root/variables" as *;
 
 .home {
   display: flex;
@@ -6,14 +6,9 @@
   align-items: center;
   justify-content: flex-start;
 
-  background: rgb(195, 34, 137);
-  background: linear-gradient(
-    0deg,
-    rgba(195, 34, 137, 1) 0%,
-    rgba(253, 108, 45, 1) 100%
-  );
+  background: $bg-sunset;
 
-  padding-top: 10vh;
+  padding-top: 5vh;
 
   width: 100vw;
   height: 100vh;
@@ -22,6 +17,10 @@
     font-family: "Dancing Script", cursive;
     font-size: 4em;
     color: whitesmoke;
+  }
+
+  .taskEmail {
+    margin-top: 2em;
   }
 
   .footer {
