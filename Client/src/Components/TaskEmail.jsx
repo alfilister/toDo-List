@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import firebaseApp from "../Firebase/credenciales"
 import { getFirestore, collection, addDoc } from "firebase/firestore"
 import { useSelector } from "react-redux"
+import InputText from "./Buttons & Inputs/InputText"
+import ButtonMain from "./Buttons & Inputs/ButtonMain"
 
 const firestore = getFirestore(firebaseApp)
 
@@ -137,24 +139,21 @@ function TaskEmail() {
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e, input, tasks)}>
-        <input
-          type="email"
-          placeholder="e-mail to"
+        <InputText
           name="email"
-          id="email"
-          onChange={(e) => handleChange(e)}
           value={input.email}
-        />
-        <input
-          type="text"
-          placeholder="personalized subject"
-          name="subject"
-          id="subject"
+          placeholder="e-mail to"
           onChange={(e) => handleChange(e)}
-          value={input.subject}
         />
 
-        <button type="submit">Send tasks</button>
+        <InputText
+          name="subject"
+          value={input.subject}
+          placeholder="personalized subject"
+          onChange={(e) => handleChange(e)}
+        />
+
+        <ButtonMain innerText="Send tasks" type="submit" />
       </form>
     </div>
   )

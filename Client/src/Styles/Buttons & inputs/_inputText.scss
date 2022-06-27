@@ -1,0 +1,16 @@
+.inputText {
+  border-radius: 10px;
+  border: none;
+
+  width: max-content;
+  height: 2em;
+
+  padding-left: 0.5em;
+  margin-right: 0.5em;
+
+  background-color: rgba(255, 255, 255, 0.444);
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}

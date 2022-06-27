@@ -2,6 +2,11 @@
 
 @use "./Styles/root/normalize";
 
+// pages
+
+@use "./Styles/Pages/home";
+@use "./Styles/Pages/landing";
+
 // components
 
 @use "./Styles/components/addBar";
@@ -10,7 +15,7 @@
 @use "./Styles/components/tabList";
 @use "./Styles/components/footer";
 
-// pages
+// Buttons & Inputs
 
-@use "./Styles/Pages/home";
-@use "./Styles/Pages/landing";
+@use "./Styles/Buttons\ &\ inputs/inputText";
+@use "./Styles/Buttons\ &\ inputs/buttonMain";
