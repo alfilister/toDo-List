@@ -26,6 +26,7 @@ function Home() {
 
   const [sort, setSort] = useState("Asc")
   const [filter, setFilter] = useState("All")
+  const [dayStyle, setDayStyle] = useState(true)
 
   const handleLogout = (e) => {
     e.preventDefault
@@ -35,7 +36,20 @@ function Home() {
   }
 
   return (
-    <div className="home">
+    <div className={dayStyle ? "sunnyHome" : "moonHome"}>
+      <div className="styleChanger">
+        <button
+          className={dayStyle ? "sunnyChanger" : "moonChanger"}
+          onClick={() => setDayStyle(!dayStyle)}
+        >
+          {!dayStyle ? (
+            <i class="fa-solid fa-moon"></i>
+          ) : (
+            <i class="fa-solid fa-sun"></i>
+          )}
+        </button>
+      </div>
+
       <ButtonMain
         innerText={logginStatus ? "Logout" : "Sign Up"}
         onClick={(e) => handleLogout(e)}

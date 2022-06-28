@@ -1,6 +1,6 @@
 @use "../root/variables" as *;
 
-.home {
+.sunnyHome {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,38 @@
 
   width: 100vw;
   height: 100vh;
+
+  .styleChanger {
+    margin: 1em;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+
+    background-color: rgba(255, 255, 255, 0.26);
+
+    .sunnyChanger {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.096);
+      border-style: none;
+      cursor: pointer;
+      transform: translateX(0px);
+
+      &:focus {
+        transform: translateX(100%);
+        transition: transform 0.5s;
+      }
+
+      .fa-solid {
+        color: whitesmoke;
+        font-size: 2em;
+      }
+    }
+    .moonChanger {
+      @extend .sunnyChanger;
+    }
+  }
 
   h1 {
     font-family: "Dancing Script", cursive;
@@ -30,4 +62,9 @@
     height: 60px;
     background: rgba(255, 255, 255, 0.448);
   }
+}
+
+.moonHome {
+  @extend .sunnyHome;
+  background: $bg-night;
 }
