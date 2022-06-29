@@ -10,10 +10,12 @@
 
 // components
 
+@use "./Styles/components/navBar";
 @use "./Styles/components/addBar";
 @use "./Styles/components/filter";
 @use "./Styles/components/list";
 @use "./Styles/components/tabList";
+@use "./Styles/components/styleChanger";
 @use "./Styles/components/footer";
 
 // Buttons & Inputs

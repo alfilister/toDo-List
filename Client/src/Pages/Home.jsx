@@ -5,13 +5,9 @@ import Filter from "../Components/Filter"
 import Footer from "../Components/Footer"
 import List from "../Components/List"
 import { getTasks, logoutStatus } from "../Redux/Actions"
-import firebaseApp from "../Firebase/credenciales"
-import { getAuth, signOut } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import TaskEmail from "../Components/TaskEmail"
-import ButtonMain from "../Components/Buttons & Inputs/ButtonMain"
-
-const auth = getAuth(firebaseApp)
+import NavBar from "../Components/NavBar"
 
 function Home() {
   const dispatch = useDispatch()
@@ -22,38 +18,14 @@ function Home() {
   }, [])
 
   const tasks = useSelector((state) => state.tasks)
-  const logginStatus = useSelector((state) => state.loggin)
 
   const [sort, setSort] = useState("Asc")
   const [filter, setFilter] = useState("All")
   const [dayStyle, setDayStyle] = useState(true)
 
-  const handleLogout = (e) => {
-    e.preventDefault
-    signOut(auth)
-    dispatch(logoutStatus())
-    navigate("/")
-  }
-
   return (
     <div className={dayStyle ? "sunnyHome" : "moonHome"}>
-      <div className="styleChanger">
-        <button
-          className={dayStyle ? "sunnyChanger" : "moonChanger"}
-          onClick={() => setDayStyle(!dayStyle)}
-        >
-          {!dayStyle ? (
-            <i class="fa-solid fa-moon"></i>
-          ) : (
-            <i class="fa-solid fa-sun"></i>
-          )}
-        </button>
-      </div>
-
-      <ButtonMain
-        innerText={logginStatus ? "Logout" : "Sign Up"}
-        onClick={(e) => handleLogout(e)}
-      />
+      <NavBar dayStyle={dayStyle} setDayStyle={setDayStyle} />
 
       <h1>2do List</h1>
       <AddBar />
