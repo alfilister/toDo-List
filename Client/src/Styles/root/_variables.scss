@@ -9,9 +9,14 @@ $bg-sunset: linear-gradient(
   rgba(253, 108, 45, 1) 100%
 );
 
-$bg-night: linear-gradient(
+$bg-moon: linear-gradient(
   0deg,
   rgba(2, 0, 36, 1) 0%,
   rgba(9, 9, 121, 1) 0%,
   rgba(0, 212, 255, 1) 100%
 );
+
+/* Colors */
+
+$sunset-alert: rgb(238, 0, 255);
+$moon-alert: rgb(9, 9, 121, 1);

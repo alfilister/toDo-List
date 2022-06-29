@@ -1,14 +1,19 @@
+@use "../root/variables" as *;
+
 .footerBar {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin-top: 1em;
+  background-color: rgba(255, 255, 255, 0.448);
 
   h4 {
     color: whitesmoke;
 
     span {
-      color: rgb(238, 0, 255);
+      color: $sunset-alert;
       margin: 0 0.2em;
     }
   }
@@ -27,6 +32,16 @@
       &:active {
         color: rgba(245, 245, 245, 0);
       }
+    }
+  }
+}
+
+.moonFooter {
+  @extend .footerBar;
+
+  h4 {
+    span {
+      color: $moon-alert;
     }
   }
 }

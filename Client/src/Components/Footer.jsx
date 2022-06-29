@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 
-function Footer() {
+function Footer({ dayStyle }) {
   return (
-    <footer className="footerBar">
+    <footer className={dayStyle ? "footerBar" : "moonFooter"}>
       <h4>
         Web App developed by <span>Jorge Castillo</span>
       </h4>
@@ -23,7 +23,7 @@ function Footer() {
         ></i>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

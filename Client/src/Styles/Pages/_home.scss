@@ -11,7 +11,7 @@
   padding-top: 5vh;
 
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   .styleChanger {
     margin: 1em;
@@ -54,17 +54,9 @@
   .taskEmail {
     margin-top: 2em;
   }
-
-  .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.448);
-  }
 }
 
 .moonHome {
   @extend .sunnyHome;
-  background: $bg-night;
+  background: $bg-moon;
 }

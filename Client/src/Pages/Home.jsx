@@ -64,9 +64,7 @@ function Home() {
         <TaskEmail />
       </div>
 
-      <div className="footer">
-        <Footer />
-      </div>
+      <Footer dayStyle={dayStyle} />
     </div>
   )
 }
