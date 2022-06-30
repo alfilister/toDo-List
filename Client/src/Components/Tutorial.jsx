@@ -1,16 +1,26 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Loggin from "./Loggin";
+import React from "react"
+import { useNavigate } from "react-router-dom"
+import Loggin from "./Loggin"
+import ButtonMain from "./Buttons & Inputs/ButtonMain"
+import Footer from "../Components/Footer"
 
 function Tutorial() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
-    <div>
-      <button onClick={() => navigate("home")}>Continue as a guest</button>
-      <Loggin />
+    <div className="tutorial">
+      <div className="btnGuest">
+        <ButtonMain
+          innerText="Continue as a guest"
+          onClick={() => navigate("home")}
+        />
+      </div>
+      <div className="loginSpace">
+        <Loggin />
+      </div>
+      <Footer />
     </div>
-  );
+  )
 }
 
-export default Tutorial;
+export default Tutorial
