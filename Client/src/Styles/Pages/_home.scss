@@ -26,3 +26,13 @@
   @extend .sunnyHome;
   background: $bg-moon;
 }
+
+@media screen and (max-width: $pc) {
+  .sunnyHome {
+    background: black;
+  }
+
+  .moonHome {
+    background: $bg-moon;
+  }
+}

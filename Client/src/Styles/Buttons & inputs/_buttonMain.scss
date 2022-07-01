@@ -1,9 +1,13 @@
+@use "../root/variables" as *;
+
 .buttonMain {
   border-radius: 10px;
   border: none;
 
-  width: max-content;
+  width: 5em;
   height: 2em;
+
+  font-size: 1.5em;
 
   background-color: rgba(255, 255, 255, 0.444);
   color: rgb(79, 79, 79);
@@ -11,5 +15,11 @@
   &:hover {
     background-color: rgba(255, 255, 255, 1);
     transition: 1s;
+  }
+}
+
+@media screen and (max-width: $pc) {
+  .buttonMain {
+    height: max-content;
   }
 }
