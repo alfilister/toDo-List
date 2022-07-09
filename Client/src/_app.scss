@@ -12,6 +12,7 @@
 
 @use "./Styles/components/navBar";
 @use "./Styles/components/tutorial";
+@use "./Styles/components/loggin";
 @use "./Styles/components/addBar";
 @use "./Styles/components/filter";
 @use "./Styles/components/list";
@@ -23,3 +24,4 @@
 
 @use "./Styles/Buttons\ &\ inputs/inputText";
 @use "./Styles/Buttons\ &\ inputs/buttonMain";
+@use "./Styles/Buttons\ &\ inputs/buttonGeneral";

@@ -6,10 +6,12 @@
   align-items: center;
   justify-content: flex-start;
 
+  padding-top: 4em;
+
   background: $bg-sunset;
 
   width: 100vw;
-  height: 100%;
+  height: 100vh;
 
   h1 {
     font-family: "Dancing Script", cursive;

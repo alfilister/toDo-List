@@ -11,6 +11,7 @@ function Tutorial() {
     <div className="tutorial">
       <div className="btnGuest">
         <ButtonMain
+          className="buttonMain"
           innerText="Continue as a guest"
           onClick={() => navigate("home")}
         />
@@ -18,7 +19,6 @@ function Tutorial() {
       <div className="loginSpace">
         <Loggin />
       </div>
-      <Footer />
     </div>
   )
 }

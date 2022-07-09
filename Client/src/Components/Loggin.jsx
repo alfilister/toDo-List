@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import firebaseApp from "../Firebase/credenciales";
+import React, { useState } from "react"
+import firebaseApp from "../Firebase/credenciales"
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { logginStatus } from "../Redux/Actions";
-import { useDispatch } from "react-redux";
+} from "firebase/auth"
+import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { logginStatus } from "../Redux/Actions"
+import { useDispatch } from "react-redux"
+import ButtonMain from "./Buttons & Inputs/ButtonMain"
+import InputText from "./Buttons & Inputs/InputText"
 
-const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp)
+const firestore = getFirestore(firebaseApp)
 
 function Loggin() {
-  const dispatch = useDispatch();
-  const [signingUp, setSigningUp] = useState(false);
+  const dispatch = useDispatch()
+  const [signingUp, setSigningUp] = useState(false)
   const [input, setInput] = useState({
     nickname: "",
     email: "",
     password: "",
     role: "select",
     tasks: [],
-  });
+  })
 
   const registerUser = async (nickname, email, password, role, tasks) => {
     const infoUser = await createUserWithEmailAndPassword(
@@ -29,15 +31,15 @@ function Loggin() {
       email,
       password
     ).then((firebaseUser) => {
-      return firebaseUser;
-    });
+      return firebaseUser
+    })
 
-    const docuRef = doc(firestore, `/users/${infoUser.user.uid}`);
-    setDoc(docuRef, { nickname, email, password, role, tasks });
-  };
+    const docuRef = doc(firestore, `/users/${infoUser.user.uid}`)
+    setDoc(docuRef, { nickname, email, password, role, tasks })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!signingUp) {
       registerUser(
@@ -46,12 +48,12 @@ function Loggin() {
         input.password,
         input.role,
         input.tasks
-      );
-      signInWithEmailAndPassword(auth, input.email, input.password);
-      dispatch(logginStatus());
+      )
+      signInWithEmailAndPassword(auth, input.email, input.password)
+      dispatch(logginStatus())
     } else {
-      signInWithEmailAndPassword(auth, input.email, input.password);
-      dispatch(logginStatus());
+      signInWithEmailAndPassword(auth, input.email, input.password)
+      dispatch(logginStatus())
     }
 
     setInput({
@@ -60,7 +62,7 @@ function Loggin() {
       password: "",
       role: "select",
       tasks: [],
-    });
+    })
 
     //THIS IS JUST ANOTHER WAY TO CAPTURE THE VALUES, BUT PERSONALLY I PREFER WITH THE HANDLEcHANGE
 
@@ -69,60 +71,60 @@ function Loggin() {
     // password: e.target.elements.password.value,
     // role: e.target.elements.role.value,
     // });
-  };
+  }
 
   const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   return (
-    <div>
-      <h1>{!signingUp ? "Sign Up" : "Loggin"}</h1>
-      <button onClick={() => setSigningUp(!signingUp)}>
-        {signingUp ? "I want to Sign Up" : "I already have an account"}
-      </button>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <div className="loggin">
+      <h1 className="actionSuggested">{!signingUp ? "Sign Up" : "Loggin"}</h1>
+      <div className="btnAlternative">
+        <ButtonMain
+          onClick={() => setSigningUp(!signingUp)}
+          className="buttonGeneral"
+          innerText={
+            signingUp ? "I want to Sign Up" : "I already have an account"
+          }
+        />
+      </div>
+
+      <form className="formTutorial">
         {!signingUp && (
-          <label>
-            nickname:
-            <input
-              type="text"
-              // id="nickname"
-              name="nickname"
-              value={input.nickname}
-              placeholder="How do you want us to call you?"
-              onChange={(e) => handleChange(e)}
-            />
-          </label>
+          <>
+            <label>nickname:</label>
+            <div className="inputSpace">
+              <InputText
+                name="nickname"
+                value={input.nickname}
+                placeholder="How do you want us to call you?"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+          </>
         )}
-        <label>
-          E-mail:
-          <input
-            type="email"
-            // id="email"
-            name="email"
-            value={input.email}
-            placeholder="example@mail.ex"
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            // id="password"
-            name="password"
-            value={input.password}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+        <label>E-mail:</label>
+        <InputText
+          name="email"
+          value={input.email}
+          placeholder="example@mail.ex"
+          onChange={(e) => handleChange(e)}
+        />
+        <label>Password:</label>
+        <InputText
+          type="password"
+          name="password"
+          value={input.password}
+          onChange={(e) => handleChange(e)}
+        />
 
         {!signingUp && (
-          <label>
-            Role:
+          <>
+            <label>Role:</label>
             <select
               // id="role"
               name="role"
@@ -133,12 +135,19 @@ function Loggin() {
               <option value="pro">proUser</option>
               <option value="basic">basic</option>
             </select>
-          </label>
+          </>
         )}
-        <input type="submit" value={!signingUp ? "Sign Up" : "Loggin"} />
+
+        <div className="btnConfirmation">
+          <ButtonMain
+            className="buttonGeneral"
+            innerText={!signingUp ? "Sign Up" : "Loggin"}
+            onClick={(e) => handleSubmit(e)}
+          />
+        </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default Loggin;
+export default Loggin

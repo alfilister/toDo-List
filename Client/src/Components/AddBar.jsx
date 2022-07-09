@@ -136,7 +136,11 @@ function AddBar() {
         <option value="1">Low</option>
       </select>
 
-      <ButtonMain innerText="Add" onClick={(e) => handleBtn(e)} />
+      <ButtonMain
+        className="buttonGeneral"
+        innerText="Add"
+        onClick={(e) => handleBtn(e)}
+      />
     </div>
   )
 }

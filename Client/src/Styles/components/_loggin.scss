@@ -1,0 +1,59 @@
+.loggin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .actionSuggested {
+    color: white;
+  }
+
+  .btnAlternative {
+    margin: 1em;
+  }
+
+  .formTutorial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .btnConfirmation {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      margin: 1em;
+
+      width: 100%;
+    }
+  }
+
+  label {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin-top: 0.5em;
+  }
+
+  select {
+    border-radius: 10px;
+    border: none;
+
+    width: max-content;
+    height: 2em;
+
+    margin-right: 0.5em;
+
+    background-color: rgba(255, 255, 255, 0.444);
+    color: rgb(79, 79, 79);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+      transition: 1s;
+    }
+  }
+}

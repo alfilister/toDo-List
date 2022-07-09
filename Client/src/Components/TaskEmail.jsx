@@ -153,7 +153,11 @@ function TaskEmail() {
           onChange={(e) => handleChange(e)}
         />
 
-        <ButtonMain innerText="Send tasks" type="submit" />
+        <ButtonMain
+          className="buttonGeneral"
+          innerText="Send tasks"
+          type="submit"
+        />
       </form>
     </div>
   )

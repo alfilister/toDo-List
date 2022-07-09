@@ -21,18 +21,28 @@ function NavBar({ dayStyle, setDayStyle }) {
     dispatch(logoutStatus())
     navigate("/")
   }
+
+  const location =
+    window.location.href === "http://localhost:3000/home" ? true : false
+  console.log(location)
+
   return (
     <nav className="navBar">
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
 
-      <ButtonMain
-        innerText={logginStatus ? "Logout" : "Sign Up"}
-        onClick={(e) => handleLogout(e)}
-      />
+      {location && (
+        <>
+          <ButtonMain
+            className="buttonMain"
+            innerText={logginStatus ? "Logout" : "Sign Up"}
+            onClick={(e) => handleLogout(e)}
+          />
 
-      <StyleChanger dayStyle={dayStyle} setDayStyle={setDayStyle} />
+          <StyleChanger dayStyle={dayStyle} setDayStyle={setDayStyle} />
+        </>
+      )}
     </nav>
   )
 }

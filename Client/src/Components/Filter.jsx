@@ -12,16 +12,23 @@ function Filter({ setFilter }) {
       <h3>Filter by status</h3>
 
       <ButtonMain
+        className="buttonGeneral"
         name="Active"
         onClick={(e) => handleFilter(e)}
         innerText="Active"
       />
       <ButtonMain
+        className="buttonGeneral"
         name="Done"
         onClick={(e) => handleFilter(e)}
         innerText="Done"
       />
-      <ButtonMain name="All" onClick={(e) => handleFilter(e)} innerText="All" />
+      <ButtonMain
+        className="buttonGeneral"
+        name="All"
+        onClick={(e) => handleFilter(e)}
+        innerText="All"
+      />
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import React from "react"
 
-function InputText({ name, value, placeholder, onChange }) {
+function InputText({ type, name, value, placeholder, onChange }) {
   return (
     <>
       <input
         className="inputText"
-        type="text"
+        type={type}
         name={name}
         value={value}
         placeholder={placeholder}
