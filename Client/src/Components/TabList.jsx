@@ -1,57 +1,62 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
 
-import firebaseApp from "../Firebase/credenciales";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import firebaseApp from "../Firebase/credenciales"
+import { getFirestore, doc, setDoc } from "firebase/firestore"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
-import { deleteTask, editTask, modifyTask } from "../Redux/Actions";
+import { deleteTask, editTask, modifyTask } from "../Redux/Actions"
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import "sweetalert2/src/sweetalert2.scss"; // Don't forget to import the styles!
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+import "sweetalert2/src/sweetalert2.scss" // Don't forget to import the styles!
 
-const MySwal = withReactContent(Swal);
+const MySwal = withReactContent(Swal)
 
 function TabList({ task, logginStatus, userRole }) {
-  const uid = useSelector((state) => state.userInfo.uid);
-  const tasksState = useSelector((state) => state.tasks);
-  const dispatch = useDispatch();
+  const uid = useSelector((state) => state.userInfo.uid)
+  const tasksState = useSelector((state) => state.tasks)
+  const dispatch = useDispatch()
 
-  const firestore = getFirestore(firebaseApp);
-  const auth = getAuth(firebaseApp);
+  const firestore = getFirestore(firebaseApp)
+  const auth = getAuth(firebaseApp)
 
   const proFeature = (logginStatus, userRole) => {
     if (logginStatus && userRole === "pro") {
       return (
         <i class="fa-solid fa-pen-to-square" onClick={(e) => handleEdit(e)}></i>
-      );
+      )
     }
-  };
+  }
 
   const handleCheck = (e) => {
     task.taskStatus === "Active"
       ? (task.taskStatus = "Done")
-      : (task.taskStatus = "Active");
+      : (task.taskStatus = "Active")
 
-    dispatch(modifyTask(task.id));
+    dispatch(modifyTask(task.id))
 
     if (userRole === "pro" || userRole === "basic") {
-      const docuRef = doc(firestore, `/users/${uid}`);
+      const docuRef = doc(firestore, `/users/${uid}`)
       setDoc(
         docuRef,
         {
           tasks: tasksState,
         },
         { merge: true }
-      );
+      )
     }
-  };
-
-  const dateRestriction = new Date().toISOString().split("T")[0];
+  }
+  const date = new Date()
+  const dateRestriction = new Date(
+    date.getTime() - date.getTimezoneOffset() * 60000 - 86400
+  )
+    .toISOString()
+    .slice(0, 10)
+  // const dateRestriction = new Date().toISOString().split("T")[0]
 
   const handleEdit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     MySwal.fire({
       title: "Task detail",
       icon: "info",
@@ -109,21 +114,21 @@ function TabList({ task, logginStatus, userRole }) {
 
           preConfirm: () => {
             const formTask =
-              MySwal.getPopup().querySelector("#taskName").value || task.task;
+              MySwal.getPopup().querySelector("#taskName").value || task.task
             const formPriority =
               MySwal.getPopup().querySelector("#priority").value ||
-              task.priority;
+              task.priority
             const formTimeLimit =
               MySwal.getPopup().querySelector("#timeLimit").value ||
-              task.timeLimit;
+              task.timeLimit
             const formSetAlert =
               (MySwal.getPopup().querySelector("#setAlert").value &&
                 MySwal.getPopup().querySelector("#setAlert").value !==
                   "change" &&
                 MySwal.getPopup().querySelector("#setAlert").value) ||
-              task.setAlert;
+              task.setAlert
             const formDetails =
-              MySwal.getPopup().querySelector("#details").value || task.details;
+              MySwal.getPopup().querySelector("#details").value || task.details
 
             dispatch(
               editTask({
@@ -138,37 +143,37 @@ function TabList({ task, logginStatus, userRole }) {
                 setAlert: formSetAlert,
                 details: formDetails,
               })
-            );
+            )
 
             if (userRole === "pro" || userRole === "basic") {
-              const docuRef = doc(firestore, `/users/${uid}`);
+              const docuRef = doc(firestore, `/users/${uid}`)
               setDoc(
                 docuRef,
                 {
                   tasks: tasksState,
                 },
                 { merge: true }
-              );
+              )
             }
           },
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
   const handleTrash = (e) => {
-    e.preventDefault();
-    dispatch(deleteTask(task.id));
+    e.preventDefault()
+    dispatch(deleteTask(task.id))
 
     if (uid) {
-      const docuRef = doc(firestore, `/users/${uid}`);
+      const docuRef = doc(firestore, `/users/${uid}`)
       setDoc(
         docuRef,
         {
           tasks: tasksState.filter((el) => el.id !== task.id),
         },
         { merge: true }
-      );
+      )
 
       onAuthStateChanged(auth, (firebaseUser) => {
         if (firebaseUser) {
@@ -181,20 +186,20 @@ function TabList({ task, logginStatus, userRole }) {
                 role: info.role,
                 tasks: info.tasks,
               })
-            );
-          });
+            )
+          })
         }
-      });
+      })
     }
-  };
-
-  var counter = [];
-
-  for (let index = 0; index < Number(task.priority); index++) {
-    counter.push("flag");
   }
 
-  var idSetter = 0;
+  var counter = []
+
+  for (let index = 0; index < Number(task.priority); index++) {
+    counter.push("flag")
+  }
+
+  var idSetter = 0
 
   return (
     <div className={userRole === "pro" ? "tabListPro" : "tabList"}>
@@ -214,7 +219,7 @@ function TabList({ task, logginStatus, userRole }) {
 
       <i className="fa-solid fa-trash-can" onClick={(e) => handleTrash(e)}></i>
     </div>
-  );
+  )
 }
 
-export default TabList;
+export default TabList

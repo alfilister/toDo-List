@@ -9,15 +9,18 @@ function Tutorial() {
 
   return (
     <div className="tutorial">
+      <div className="loginSpace">
+        <Loggin />
+      </div>
       <div className="btnGuest">
+        <p>
+          - Or - <br /> - Try the basics -
+        </p>
         <ButtonMain
           className="buttonMain"
           innerText="Continue as a guest"
           onClick={() => navigate("home")}
         />
-      </div>
-      <div className="loginSpace">
-        <Loggin />
       </div>
     </div>
   )

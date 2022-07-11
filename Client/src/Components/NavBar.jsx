@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import logo from "../Miscellaneous/jotaLogo.png"
 import { logoutStatus } from "../Redux/Actions"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
@@ -11,6 +11,8 @@ import firebaseApp from "../Firebase/credenciales"
 const auth = getAuth(firebaseApp)
 
 function NavBar({ dayStyle, setDayStyle }) {
+  const loc = useLocation()
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const logginStatus = useSelector((state) => state.loggin)
@@ -22,8 +24,7 @@ function NavBar({ dayStyle, setDayStyle }) {
     navigate("/")
   }
 
-  const location =
-    window.location.href === "http://localhost:3000/home" ? true : false
+  const location = loc.pathname === "/home" ? true : false
   console.log(location)
 
   return (
