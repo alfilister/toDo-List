@@ -81,12 +81,12 @@ function TabList({ task, logginStatus, userRole }) {
           html: `
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Task Name</label>
-          <input style="margin-top:0.5em" type="text"  name='taskName' id="taskName" placeholder=${task.task} value=${task.task} class="swal2-input">
+          <input style="margin-top:0.5em" type="text"  name='taskName' id="taskName" placeholder="${task.task}" value="${task.task}" class="swal2-input">
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Priority</label>
-          <input style="margin-top:0.5em" type="number" max='5' min='1' name='priority' id="priority" placeholder=${task.priority} value=${task.priority} class="swal2-input"> 
+          <input style="margin-top:0.5em" type="number" max='5' min='1' name='priority' id="priority" placeholder="${task.priority}" value="${task.priority}" class="swal2-input"> 
           </div>
 
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
@@ -106,7 +106,7 @@ function TabList({ task, logginStatus, userRole }) {
           </div>
           <div style="display:flex; flex-direction:column; align-items:flex-start"> 
           <label style="margin: 1em auto auto 2.3em">Details</label>
-          <input style="margin-top:0.5em" type="textArea" name='details' id="details" placeholder=${task.details} value=${task.details} class="swal2-input">
+          <input style="margin-top:0.5em" type="textArea" name='details' id="details" placeholder="${task.details}" value="${task.details}" class="swal2-input">
           </div>`,
 
           confirmButtonText: "Confirm modifications",
