@@ -1,10 +1,14 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
-import TabList from "./TabList"
+import ListDailyTasks from "./ListDailyTasks"
+import { getTasks } from "../Redux/Actions"
 
 function DailyTasks() {
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const userInfo = useSelector((state) => state.userInfo)
 
@@ -12,7 +16,10 @@ function DailyTasks() {
   const date2Show = currentDay.toISOString().slice(0, 10)
 
   const timeLimitTask =
-    userInfo && userInfo.tasks.filter((el) => el.timeLimit !== "not-defined")
+    userInfo &&
+    userInfo.tasks.filter(
+      (el) => el.timeLimit !== "not-defined" && el.taskStatus === "Active"
+    )
 
   const timeOutOnes =
     timeLimitTask && timeLimitTask.filter((el) => el.timeLimit < date2Show)
@@ -21,26 +28,36 @@ function DailyTasks() {
     timeLimitTask && timeLimitTask.filter((el) => el.timeLimit === date2Show)
   console.log(todayTasks)
 
+  dispatch(getTasks())
+
   return (
     <>
       {userInfo && (
         <div className="dailyTasks">
-          <ButtonMain
-            className="buttonMain"
-            onClick={() => navigate("/home")}
-            innerText="View your tasks"
-          />
           <h2>Hi {userInfo.nickname.toUpperCase()}</h2>
-          <h3>Date {date2Show}</h3>
-          <div className="timeOutTasks">
-            {/* {timeOutOnes.map((el) => (
-              <TabList
-                task={el}
-                key={el.task}
-                logginStatus={logginStatus}
-                userRole={userRole}
-              />
-            ))} */}
+
+          {timeOutOnes.length > 0 && (
+            <div className="overdueTasks">
+              <h2>Overdue tasks</h2>
+              <div className="timeOutTasks">
+                <ListDailyTasks tasks={timeOutOnes} />
+              </div>
+            </div>
+          )}
+
+          <div className="todayTasks">
+            <h2>Tasks with timeLimit set for today</h2>
+            <div className="timeOutTasks">
+              <ListDailyTasks tasks={todayTasks} />
+            </div>
+          </div>
+
+          <div className="btnAll">
+            <ButtonMain
+              className="buttonMain"
+              onClick={() => navigate("/home")}
+              innerText="All tasks"
+            />
           </div>
         </div>
       )}

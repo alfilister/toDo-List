@@ -55,3 +55,23 @@
     margin: 0 0.5em 0 0;
   }
 }
+
+.listDayTasks {
+  @extend .list;
+  width: 900px;
+
+  .headerPro {
+    @extend .header;
+    grid-template-columns: 30% 15% 15% 15% 15% 10%;
+  }
+
+  .tabsTasks {
+    height: fit-content;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: rgba(255, 255, 255, 0.073);
+    border-radius: 15px;
+    overflow-y: scroll;
+  }
+}

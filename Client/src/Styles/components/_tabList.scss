@@ -68,3 +68,8 @@
   @extend .tabList;
   grid-template-columns: 40% 20% 15% 15% 10%;
 }
+
+.tabListDaily {
+  @extend .tabList;
+  grid-template-columns: 30% 15% 15% 15% 15% 10%;
+}

@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import AddBar from "../Components/AddBar"
 import Filter from "../Components/Filter"
-import Footer from "../Components/Footer"
 import List from "../Components/List"
 import { getTasks, logoutStatus } from "../Redux/Actions"
 import { useNavigate } from "react-router-dom"
 import TaskEmail from "../Components/TaskEmail"
-import NavBar from "../Components/NavBar"
 
 function Home({ dayStyle }) {
   const dispatch = useDispatch()
