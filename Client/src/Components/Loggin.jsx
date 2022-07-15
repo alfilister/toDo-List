@@ -7,7 +7,8 @@ import {
 } from "firebase/auth"
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { logginStatus } from "../Redux/Actions"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
 import InputText from "./Buttons & Inputs/InputText"
 
@@ -15,6 +16,8 @@ const auth = getAuth(firebaseApp)
 const firestore = getFirestore(firebaseApp)
 
 function Loggin() {
+  // const userRole = useSelector((state) => state.userInfo.role)
+  // const navigate = useNavigate()
   const dispatch = useDispatch()
   const [signingUp, setSigningUp] = useState(false)
   const [input, setInput] = useState({

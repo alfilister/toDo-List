@@ -16,6 +16,9 @@ function Home({ dayStyle }) {
   }, [])
 
   const tasks = useSelector((state) => state.tasks)
+  const userRole = useSelector((state) => state.userInfo.role)
+
+  console.log(userRole)
 
   const [sort, setSort] = useState("Asc")
   const [filter, setFilter] = useState("All")
@@ -27,9 +30,11 @@ function Home({ dayStyle }) {
       <Filter setFilter={setFilter} />
       <List sort={sort} setSort={setSort} tasks={tasks} filter={filter} />
 
-      <div className="taskEmail">
-        <TaskEmail />
-      </div>
+      {userRole === "pro" && (
+        <div className="taskEmail">
+          <TaskEmail />
+        </div>
+      )}
     </div>
   )
 }

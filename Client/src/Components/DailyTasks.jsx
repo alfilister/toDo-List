@@ -12,8 +12,10 @@ function DailyTasks() {
   const navigate = useNavigate()
   const userInfo = useSelector((state) => state.userInfo)
 
-  const currentDay = new Date()
-  const date2Show = currentDay.toISOString().slice(0, 10)
+  const date = new Date()
+  const date2Show = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .slice(0, 10)
 
   const timeLimitTask =
     userInfo &&
@@ -45,18 +47,20 @@ function DailyTasks() {
             </div>
           )}
 
-          <div className="todayTasks">
-            <h2>Tasks with timeLimit set for today</h2>
-            <div className="timeOutTasks">
-              <ListDailyTasks tasks={todayTasks} />
+          {todayTasks.length > 0 && (
+            <div className="todayTasks">
+              <h2>Tasks with timeLimit set for today</h2>
+              <div className="timeOutTasks">
+                <ListDailyTasks tasks={todayTasks} />
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="btnAll">
             <ButtonMain
               className="buttonMain"
               onClick={() => navigate("/home")}
-              innerText="All tasks"
+              innerText="Go to all tasks"
             />
           </div>
         </div>

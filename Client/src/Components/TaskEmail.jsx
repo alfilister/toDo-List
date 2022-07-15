@@ -130,16 +130,17 @@ function TaskEmail() {
 
     sendTasksEmail(input.email, input.subject, tasks)
 
-    // setInput({
-    //   email: "",
-    //   subject: "",
-    // })
+    setInput({
+      email: "",
+      subject: "",
+    })
   }
 
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e, input, tasks)}>
         <InputText
+          type="email"
           name="email"
           value={input.email}
           placeholder="e-mail to"

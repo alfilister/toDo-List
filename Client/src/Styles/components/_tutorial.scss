@@ -16,6 +16,26 @@
     rgba(255, 192, 0, 1) 100%
   );
 
+  .mainGrid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loginSpace {
+      width: 100%;
+      padding: 0 2em;
+      margin-top: 2em;
+      background-color: rgba(0, 0, 255, 0.062);
+      border-radius: 25px;
+    }
+
+    .tutorialText {
+      margin-left: 2em;
+      text-align: center;
+      color: white;
+    }
+  }
+
   .btnGuest {
     margin: 1em;
     display: flex;
@@ -27,13 +47,5 @@
       text-align: center;
       margin: 1em;
     }
-  }
-
-  .loginSpace {
-    width: 40%;
-    padding: 0 2em;
-    margin-top: 2em;
-    background-color: rgba(0, 0, 255, 0.062);
-    border-radius: 25px;
   }
 }
