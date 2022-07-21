@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
+import Footer from "./Footer"
 import ListDailyTasks from "./ListDailyTasks"
 import { getTasks } from "../Redux/Actions"
 
@@ -40,7 +41,8 @@ function DailyTasks() {
 
           {timeOutOnes.length > 0 && (
             <div className="overdueTasks">
-              <h2>Overdue tasks</h2>
+              <h2 className="h2">Overdue tasks</h2>
+              <p>Take a little time to review tasks that are overdue</p>
               <div className="timeOutTasks">
                 <ListDailyTasks tasks={timeOutOnes} />
               </div>
@@ -49,7 +51,8 @@ function DailyTasks() {
 
           {todayTasks.length > 0 && (
             <div className="todayTasks">
-              <h2>Tasks with timeLimit set for today</h2>
+              <h2 className="h2">Tasks with timeLimit set for today</h2>
+              <p>These tasks have a due limit for today</p>
               <div className="timeOutTasks">
                 <ListDailyTasks tasks={todayTasks} />
               </div>
@@ -65,6 +68,7 @@ function DailyTasks() {
           </div>
         </div>
       )}
+      <Footer />
     </>
   )
 }

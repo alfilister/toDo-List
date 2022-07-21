@@ -6,7 +6,10 @@
   align-items: center;
   justify-content: flex-start;
 
+  overflow-y: scroll;
+
   padding-top: 4em;
+  padding-bottom: 4.5em;
 
   background: $bg-sunset;
 

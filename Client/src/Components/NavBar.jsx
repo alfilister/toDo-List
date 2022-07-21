@@ -28,7 +28,7 @@ function NavBar({ dayStyle, setDayStyle }) {
   console.log(location)
 
   return (
-    <nav className="navBar">
+    <nav className={dayStyle ? "dayBar" : "nightBar"}>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
