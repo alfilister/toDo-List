@@ -61,14 +61,22 @@ function Loggin() {
       signInWithEmailAndPassword(auth, input.email, input.password)
       dispatch(logginStatus())
     } else {
-      signInWithEmailAndPassword(auth, input.email, input.password).catch(
-        (err) =>
+      signInWithEmailAndPassword(auth, input.email, input.password)
+        .then(() =>
+          MySwal.fire({
+            title: "Succesful login",
+            icon: "success",
+            timerProgressBar: true,
+            timer: 1000,
+          })
+        )
+        .catch((err) =>
           MySwal.fire({
             title: "Authentication Failed",
             text: err,
             icon: "error",
           })
-      )
+        )
       dispatch(logginStatus())
     }
 
@@ -98,7 +106,7 @@ function Loggin() {
 
   return (
     <div className="loggin">
-      <h1 className="actionSuggested">{!signingUp ? "Sign Up" : "Loggin"}</h1>
+      <h1 className="actionSuggested">{!signingUp ? "Sign Up" : "Login"}</h1>
       <h3 className="actionSuggested">
         {!signingUp
           ? "If you want to create an account"

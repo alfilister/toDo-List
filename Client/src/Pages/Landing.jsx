@@ -54,10 +54,17 @@ function Landing() {
     }
   }
 
+  function showTutorial(a, b) {
+    if (a && b) {
+      return true
+    } else {
+      false
+    }
+  }
+
   return (
     <div>
-      {!logged && <Tutorial />}
-      {logged && validationRole(userRole)}
+      {showTutorial(logged, userRole) ? validationRole(userRole) : <Tutorial />}
     </div>
   )
 }
