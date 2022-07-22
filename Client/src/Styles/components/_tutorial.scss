@@ -21,9 +21,8 @@
     align-items: center;
 
     .loginSpace {
-      width: 50%;
-      padding: 0 2em;
       margin-top: 2em;
+      width: 50%;
       background-color: rgba(0, 0, 255, 0.062);
       border-radius: 25px;
     }
@@ -37,7 +36,7 @@
       border-radius: 25px;
 
       margin-top: 2em;
-      margin-left: 2em;
+
       text-align: center;
       color: white;
 
@@ -89,7 +88,7 @@
       flex-direction: column;
 
       .loginSpace {
-        width: 50%;
+        width: 60%;
       }
 
       .tutorialText {
@@ -100,15 +99,28 @@
 
   @media screen and (max-width: $tablet) {
     .mainGrid {
-      background-color: rgba(0, 0, 0, 0.4);
       flex-direction: column;
 
       .loginSpace {
-        width: 50%;
+        width: 70%;
       }
 
       .tutorialText {
-        width: 70%;
+        width: 80%;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    .mainGrid {
+      flex-direction: column;
+
+      .loginSpace {
+        width: 80%;
+      }
+
+      .tutorialText {
+        width: 85%;
       }
     }
   }
