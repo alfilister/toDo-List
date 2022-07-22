@@ -16,26 +16,29 @@
   background: $bg-sunset;
 
   .mainGrid {
+    width: 90%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 
     .loginSpace {
-      margin-top: 2em;
+      margin: 2em 1em;
       width: 50%;
+      max-width: 400px;
       background-color: rgba(0, 0, 255, 0.062);
       border-radius: 25px;
     }
 
     .tutorialText {
-      height: 70vh;
+      height: 65vh;
       width: 50vw;
       overflow-y: scroll;
       background-color: rgba(255, 255, 255, 0.041);
 
       border-radius: 25px;
 
-      margin-top: 2em;
+      margin: 2em 1em;
 
       text-align: center;
       color: white;
