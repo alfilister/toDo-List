@@ -12,6 +12,12 @@ import { useNavigate } from "react-router-dom"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
 import InputText from "./Buttons & Inputs/InputText"
 
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+import "sweetalert2/src/sweetalert2.scss" // Don't forget to import the styles!
+
+const MySwal = withReactContent(Swal)
+
 const auth = getAuth(firebaseApp)
 const firestore = getFirestore(firebaseApp)
 
@@ -55,7 +61,14 @@ function Loggin() {
       signInWithEmailAndPassword(auth, input.email, input.password)
       dispatch(logginStatus())
     } else {
-      signInWithEmailAndPassword(auth, input.email, input.password)
+      signInWithEmailAndPassword(auth, input.email, input.password).catch(
+        (err) =>
+          MySwal.fire({
+            title: "Authentication Failed",
+            text: "User or Password are wrong",
+            icon: "error",
+          })
+      )
       dispatch(logginStatus())
     }
 
