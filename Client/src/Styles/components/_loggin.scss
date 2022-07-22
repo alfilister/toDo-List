@@ -1,3 +1,5 @@
+@use "../root/variables" as *;
+
 .loggin {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,7 @@
 
   .actionSuggested {
     color: white;
+    text-align: center;
   }
 
   .btnAlternative {
