@@ -65,7 +65,7 @@ function Loggin() {
         (err) =>
           MySwal.fire({
             title: "Authentication Failed",
-            text: "User or Password are wrong",
+            text: err,
             icon: "error",
           })
       )
