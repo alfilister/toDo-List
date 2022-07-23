@@ -211,7 +211,7 @@ function TabListDaily({ task, logginStatus, userRole }) {
         ))}
       </div>
 
-      <h5>{task.timeLimit}</h5>
+      <h5 className="taskLimitDate">{task.timeLimit}</h5>
 
       <button onClick={(e) => handleCheck(e)}>
         {task.taskStatus === "Active" ? "Active" : "Done"}

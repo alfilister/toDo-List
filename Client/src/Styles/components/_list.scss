@@ -1,3 +1,5 @@
+@use "../root/variables" as *;
+
 .list {
   display: flex;
   flex-direction: column;
@@ -58,7 +60,8 @@
 
 .listDayTasks {
   @extend .list;
-  width: 900px;
+  width: 90vw;
+  max-width: 900px;
 
   .headerPro {
     @extend .header;
@@ -73,5 +76,30 @@
     background-color: rgba(255, 255, 255, 0.073);
     border-radius: 15px;
     overflow-y: scroll;
+  }
+
+  @media screen and (max-width: $pc) {
+    .headerPro {
+      grid-template-columns: 50% 20% 20% 10%;
+      .delete,
+      .priority {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    .headerPro {
+      grid-template-columns: 60% 20% 20%;
+      .timeLimit,
+      .delete,
+      .priority {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    background-color: blue;
   }
 }

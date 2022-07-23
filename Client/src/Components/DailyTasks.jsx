@@ -51,7 +51,7 @@ function DailyTasks() {
 
           {todayTasks.length > 0 && (
             <div className="todayTasks">
-              <h2 className="h2">Tasks with timeLimit set for today</h2>
+              <h2 className="h2">Today tasks</h2>
               <p>These tasks have a due limit for today</p>
               <div className="timeOutTasks">
                 <ListDailyTasks tasks={todayTasks} />

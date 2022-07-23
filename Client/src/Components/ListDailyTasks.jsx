@@ -32,17 +32,15 @@ function ListDailyTasks({ tasks }) {
       <header className="headerPro">
         <h6>Activities</h6>
 
-        <div className="priority">
-          <h6>Priority</h6>
-        </div>
+        <h6 className="priority">Priority</h6>
 
-        <h6>Time Limit</h6>
+        <h6 className="timeLimit">Time Limit</h6>
 
         <h6>Status</h6>
 
         <h6>Detail</h6>
 
-        <h6>Delete</h6>
+        <h6 className="delete">Delete</h6>
       </header>
       <div className="tabsTasks">
         {toShow.map((el) => (
