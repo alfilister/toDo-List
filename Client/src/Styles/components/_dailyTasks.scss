@@ -14,7 +14,7 @@
   height: 100vh;
 
   padding-top: 4em;
-  padding-bottom: 4em;
+  padding-bottom: 6em;
 
   h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -43,5 +43,11 @@
 
   .btnAll {
     margin-top: 2em;
+  }
+
+  @media screen and (max-width: $phone) {
+    .overdueTasks {
+      width: 90%;
+    }
   }
 }
