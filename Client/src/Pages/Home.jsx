@@ -31,7 +31,7 @@ function Home({ dayStyle }) {
       <List sort={sort} setSort={setSort} tasks={tasks} filter={filter} />
 
       {userRole === "pro" && (
-        <div className="taskEmail">
+        <div className="emailSpace">
           <TaskEmail />
         </div>
       )}

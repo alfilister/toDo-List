@@ -64,11 +64,28 @@
       cursor: pointer;
     }
   }
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: 45% 25% 15% 15%;
+
+    .flags {
+      // display: none;
+      font-size: 0.8em;
+    }
+  }
 }
 
 .tabListPro {
   @extend .tabList;
   grid-template-columns: 40% 20% 15% 15% 10%;
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: 55% 15% 15% 15%;
+
+    .flags {
+      display: none;
+    }
+  }
 }
 
 .tabListDaily {

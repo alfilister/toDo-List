@@ -137,22 +137,24 @@ function TaskEmail() {
   }
 
   return (
-    <div>
+    <div className="taskEmail">
       <form onSubmit={(e) => handleSubmit(e, input, tasks)}>
-        <InputText
-          type="email"
-          name="email"
-          value={input.email}
-          placeholder="e-mail to"
-          onChange={(e) => handleChange(e)}
-        />
+        <div className="emailInputLine">
+          <InputText
+            type="email"
+            name="email"
+            value={input.email}
+            placeholder="e-mail to"
+            onChange={(e) => handleChange(e)}
+          />
 
-        <InputText
-          name="subject"
-          value={input.subject}
-          placeholder="personalized subject"
-          onChange={(e) => handleChange(e)}
-        />
+          <InputText
+            name="subject"
+            value={input.subject}
+            placeholder="personalized subject"
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
 
         <ButtonMain
           className="buttonGeneral"

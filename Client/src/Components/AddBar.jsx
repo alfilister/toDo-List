@@ -126,6 +126,7 @@ function AddBar() {
         onChange={(e) => handleInput(e)}
       />
       <select
+        className="selectAddBar"
         name="priority"
         value={input.priority}
         onChange={(e) => handleInput(e)}
