@@ -24,11 +24,20 @@ function NavBar({ dayStyle, setDayStyle }) {
     navigate("/")
   }
 
-  const location = loc.pathname === "/home" ? true : false
-  console.log(location)
+  const location = loc.pathname === "/home"
+
+  function dayOrNight() {
+    if (loc.pathname === "/") {
+      return "dayBar"
+    } else if (dayStyle) {
+      return "dayBar"
+    } else {
+      return "nightBar"
+    }
+  }
 
   return (
-    <nav className={dayStyle ? "dayBar" : "nightBar"}>
+    <nav className={dayOrNight()}>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>

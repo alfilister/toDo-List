@@ -3,6 +3,14 @@
 .taskEmail {
   width: 100%;
 
+  h3 {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.8em;
+    color: whitesmoke;
+    text-align: center;
+    margin: 0 0 0.2em 0;
+  }
+
   form {
     display: flex;
     justify-content: center;

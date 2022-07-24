@@ -1,8 +1,21 @@
 import React from "react"
+import { useLocation } from "react-router-dom"
 
 function Footer({ dayStyle }) {
+  var loc = useLocation().pathname
+
+  function dayOrNight() {
+    if (loc === "/") {
+      return "footerBar"
+    } else if (dayStyle) {
+      return "footerBar"
+    } else {
+      return "moonFooter"
+    }
+  }
+
   return (
-    <footer className={dayStyle ? "footerBar" : "moonFooter"}>
+    <footer className={dayOrNight()}>
       <h4>
         Web App developed by <span>Jorge Castillo</span>
       </h4>

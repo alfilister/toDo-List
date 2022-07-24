@@ -5,6 +5,12 @@ import { useSelector } from "react-redux"
 import InputText from "./Buttons & Inputs/InputText"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
 
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+import "sweetalert2/src/sweetalert2.scss" // Don't forget to import the styles!
+
+const MySwal = withReactContent(Swal)
+
 const firestore = getFirestore(firebaseApp)
 
 const sendTasksEmail = async (email, subject, tasks) => {
@@ -104,9 +110,20 @@ const sendTasksEmail = async (email, subject, tasks) => {
       },
     }
 
+    MySwal.fire({
+      title: "Email sent",
+      icon: "success",
+      timerProgressBar: true,
+      timer: 1000,
+    })
+
     return await addDoc(collectionRef, emailContent)
   } catch (err) {
-    console.log(err)
+    MySwal.fire({
+      title: "Email sent",
+      text: err,
+      icon: "error",
+    })
   }
 }
 
@@ -138,6 +155,7 @@ function TaskEmail() {
 
   return (
     <div className="taskEmail">
+      <h3 className="emailInstruction">If you want to send your task</h3>
       <form onSubmit={(e) => handleSubmit(e, input, tasks)}>
         <div className="emailInputLine">
           <InputText
@@ -156,11 +174,13 @@ function TaskEmail() {
           />
         </div>
 
-        <ButtonMain
-          className="buttonGeneral"
-          innerText="Send tasks"
-          type="submit"
-        />
+        {input.email && (
+          <ButtonMain
+            className="buttonGeneral"
+            innerText="Send tasks"
+            type="submit"
+          />
+        )}
       </form>
     </div>
   )
