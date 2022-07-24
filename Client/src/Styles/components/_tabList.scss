@@ -73,6 +73,14 @@
       font-size: 0.8em;
     }
   }
+
+  @media screen and (max-width: $phone) {
+    grid-template-columns: 60% 20% 20%;
+
+    .flags {
+      display: none;
+    }
+  }
 }
 
 .tabListPro {
@@ -81,6 +89,14 @@
 
   @media screen and (max-width: $tablet) {
     grid-template-columns: 55% 15% 15% 15%;
+
+    .flags {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    grid-template-columns: 45% 20% 20% 15%;
 
     .flags {
       display: none;
