@@ -33,6 +33,8 @@ function DailyTasks() {
 
   dispatch(getTasks())
 
+  if (!timeOutOnes.length && !todayTasks.length) navigate("/home")
+
   return (
     <>
       {userInfo && (

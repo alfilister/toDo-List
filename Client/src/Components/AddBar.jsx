@@ -110,6 +110,13 @@ function AddBar() {
         )
       }
 
+      MySwal.fire({
+        title: "Task succesfully added",
+        icon: "success",
+        timerProgressBar: true,
+        timer: 1000,
+      })
+
       setInput({
         task: "",
         priority: "Priority",

@@ -107,11 +107,6 @@ function Loggin() {
   return (
     <div className="loggin">
       <h1 className="actionSuggested">{!signingUp ? "Sign Up" : "Login"}</h1>
-      <h3 className="actionSuggested">
-        {!signingUp
-          ? "If you want to create an account"
-          : "If you already have a account"}
-      </h3>
       <div className="btnAlternative">
         <ButtonMain
           onClick={() => setSigningUp(!signingUp)}
@@ -121,6 +116,11 @@ function Loggin() {
           }
         />
       </div>
+      <h3 className="actionSuggested">
+        {!signingUp
+          ? "If you want to create an account"
+          : "If you already have a account"}
+      </h3>
 
       <form className="formTutorial">
         {!signingUp && (
