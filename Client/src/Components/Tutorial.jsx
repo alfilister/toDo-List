@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom"
 import Loggin from "./Loggin"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
 
-import guestView from "../Miscellaneous/guestView.png"
-import editDetails from "../Miscellaneous/editDetails.png"
-import viewDetails from "../Miscellaneous/viewDetails.png"
-import navView from "../Miscellaneous/navBar.png"
-import nightBar from "../Miscellaneous/nightBar.png"
+import guestView from "../Miscellaneous/guestView.webp"
+import editDetails from "../Miscellaneous/editDetails.webp"
+import viewDetails from "../Miscellaneous/viewDetails.webp"
+import navView from "../Miscellaneous/navBar.webp"
+import nightBar from "../Miscellaneous/nightBar.webp"
 
-import nightMode from "../Miscellaneous/nightMode.png"
-import proView from "../Miscellaneous/proView.png"
-import emailReceive from "../Miscellaneous/emailReceived.png"
+import nightMode from "../Miscellaneous/nightMode.webp"
+import proView from "../Miscellaneous/proView.webp"
+import emailReceive from "../Miscellaneous/emailReceived.webp"
 
 function Tutorial() {
   const navigate = useNavigate()

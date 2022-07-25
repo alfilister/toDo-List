@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
-import logo from "../Miscellaneous/jotaLogo.png"
+import logo from "../Miscellaneous/jotaLogo.webp"
 import { logoutStatus } from "../Redux/Actions"
 import ButtonMain from "./Buttons & Inputs/ButtonMain"
 import StyleChanger from "./StyleChanger"
