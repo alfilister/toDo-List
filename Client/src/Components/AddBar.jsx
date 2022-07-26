@@ -113,8 +113,9 @@ function AddBar() {
       MySwal.fire({
         title: "Task succesfully added",
         icon: "success",
+        showConfirmButton: false,
         timerProgressBar: true,
-        timer: 1000,
+        timer: 800,
       })
 
       setInput({

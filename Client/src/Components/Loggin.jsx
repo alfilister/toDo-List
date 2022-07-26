@@ -21,6 +21,34 @@ const MySwal = withReactContent(Swal)
 const auth = getAuth(firebaseApp)
 const firestore = getFirestore(firebaseApp)
 
+const validate = (input) => {
+  let errors = {}
+  if (input.nickname.trim().length < 1) {
+    errors.nickname = "Nickname required"
+  } else if (!/^.{0,20}$/.test(input.nickname)) {
+    errors.nickname = "Max length 20 characters"
+  }
+  if (input.email.trim().length < 1) {
+    errors.email = "Email required"
+  } else if (
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input.email)
+  ) {
+    errors.email = "Must be a valid e-mail"
+  }
+  if (input.password.trim().length < 1) {
+    errors.password = "Password required"
+  } else if (
+    !/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,10}$/.test(input.password)
+  ) {
+    errors.password =
+      "Password must contain lowercase, uppercase and a number (length between 6 - 10 characters)"
+  }
+  if (input.role === "select") {
+    errors.role = "role selection required"
+  }
+  return errors
+}
+
 function Loggin() {
   // const userRole = useSelector((state) => state.userInfo.role)
   // const navigate = useNavigate()
@@ -51,23 +79,44 @@ function Loggin() {
     e.preventDefault()
 
     if (!signingUp) {
-      registerUser(
-        input.nickname,
-        input.email,
-        input.password,
-        input.role,
-        input.tasks
-      )
-      signInWithEmailAndPassword(auth, input.email, input.password)
-      dispatch(logginStatus())
+      if (errors.nickname || errors.email || errors.password || errors.role) {
+        return MySwal.fire({
+          title: "Something missing",
+          text: "Review the restrictions under each input",
+          icon: "warning",
+        })
+      } else if (
+        input.nickname &&
+        input.email &&
+        input.password &&
+        input.role
+      ) {
+        registerUser(
+          input.nickname,
+          input.email,
+          input.password,
+          input.role,
+          input.tasks
+        )
+        signInWithEmailAndPassword(auth, input.email, input.password)
+        dispatch(logginStatus())
+        return MySwal.fire({
+          title: "Account create succesful",
+          icon: "success",
+          showConfirmButton: false,
+          timerProgressBar: true,
+          timer: 2000,
+        })
+      }
     } else {
       signInWithEmailAndPassword(auth, input.email, input.password)
         .then(() =>
           MySwal.fire({
             title: "Succesful login",
             icon: "success",
+            showConfirmButton: false,
             timerProgressBar: true,
-            timer: 1000,
+            timer: 2000,
           })
         )
         .catch((err) =>
@@ -80,13 +129,13 @@ function Loggin() {
       dispatch(logginStatus())
     }
 
-    setInput({
-      nickname: "",
-      email: "",
-      password: "",
-      role: "select",
-      tasks: [],
-    })
+    // setInput({
+    //   nickname: "",
+    //   email: "",
+    //   password: "",
+    //   role: "select",
+    //   tasks: [],
+    // })
 
     //THIS IS JUST ANOTHER WAY TO CAPTURE THE VALUES, BUT PERSONALLY I PREFER WITH THE HANDLEcHANGE
 
@@ -97,11 +146,19 @@ function Loggin() {
     // });
   }
 
+  const [errors, setErrors] = useState("")
+
   const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     })
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    )
   }
 
   return (
@@ -134,6 +191,7 @@ function Loggin() {
                 onChange={(e) => handleChange(e)}
               />
             </div>
+            {errors.nickname && <p className="errorLogin">{errors.nickname}</p>}
           </>
         )}
         <label>E-mail:</label>
@@ -143,6 +201,10 @@ function Loggin() {
           placeholder="example@mail.ex"
           onChange={(e) => handleChange(e)}
         />
+        {!signingUp && (
+          <>{errors.email && <p className="errorLogin">{errors.email}</p>}</>
+        )}
+
         <label>Password:</label>
         <InputText
           type="password"
@@ -150,7 +212,11 @@ function Loggin() {
           value={input.password}
           onChange={(e) => handleChange(e)}
         />
-
+        {!signingUp && (
+          <>
+            {errors.password && <p className="errorLogin">{errors.password}</p>}
+          </>
+        )}
         {!signingUp && (
           <>
             <label>Role:</label>
@@ -164,6 +230,7 @@ function Loggin() {
               <option value="pro">proUser</option>
               <option value="basic">basic</option>
             </select>
+            {errors.role && <p className="errorLogin">{errors.role}</p>}
           </>
         )}
 
