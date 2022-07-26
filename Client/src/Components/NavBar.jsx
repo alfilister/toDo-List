@@ -16,6 +16,7 @@ function NavBar({ dayStyle, setDayStyle }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const logginStatus = useSelector((state) => state.loggin)
+  const userName = useSelector((state) => state.userInfo.nickname)
 
   const handleLogout = (e) => {
     e.preventDefault
@@ -44,6 +45,9 @@ function NavBar({ dayStyle, setDayStyle }) {
 
       {location && (
         <>
+          <div className="greetingNav">
+            <h3>{userName}</h3>
+          </div>
           <ButtonMain
             className="buttonMain"
             innerText={logginStatus ? "Logout" : "Sign Up"}

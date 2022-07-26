@@ -14,6 +14,10 @@
 
   background-color: rgb(255, 200, 176);
 
+  .greetingNav {
+    color: rgb(255, 144, 96);
+  }
+
   .logo {
     display: flex;
     align-items: center;
@@ -32,4 +36,7 @@
 .nightBar {
   @extend .dayBar;
   background-color: rgb(0, 213, 255);
+  .greetingNav {
+    color: rgb(175, 242, 255);
+  }
 }
