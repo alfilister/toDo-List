@@ -9,7 +9,6 @@ import TaskEmail from "../Components/TaskEmail"
 
 function Home({ dayStyle }) {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getTasks())
@@ -17,8 +16,6 @@ function Home({ dayStyle }) {
 
   const tasks = useSelector((state) => state.tasks)
   const userRole = useSelector((state) => state.userInfo.role)
-
-  console.log(userRole)
 
   const [sort, setSort] = useState("Asc")
   const [filter, setFilter] = useState("All")

@@ -29,7 +29,6 @@ function DailyTasks() {
 
   const todayTasks =
     timeLimitTask && timeLimitTask.filter((el) => el.timeLimit === date2Show)
-  console.log(todayTasks)
 
   dispatch(getTasks())
 
