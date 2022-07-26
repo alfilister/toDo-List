@@ -28,6 +28,13 @@
       max-width: 400px;
       background-color: rgba(0, 0, 255, 0.062);
       border-radius: 25px;
+
+      .btnTutorialOpt {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1em;
+      }
     }
 
     .tutorialText {

@@ -154,12 +154,14 @@ function Tutorial() {
       <div className="mainGrid">
         <div className="loginSpace">
           <Loggin />
+          <div className="btnTutorialOpt">
+            <ButtonMain
+              className="buttonGeneral"
+              innerText={showTutorial ? "Hide Tutorial" : "Show Tutorial"}
+              onClick={(e) => handleShow(e)}
+            />
+          </div>
         </div>
-        <ButtonMain
-          className="buttonGeneral"
-          innerText={showTutorial ? "Hide Tutorial" : "Show Tutorial"}
-          onClick={(e) => handleShow(e)}
-        />
         {showTutorial && tutorialContent()}
       </div>
 

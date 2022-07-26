@@ -25,7 +25,7 @@ function NavBar({ dayStyle, setDayStyle }) {
     navigate("/")
   }
 
-  const location = loc.pathname === "/home"
+  const homeLocation = loc.pathname === "/home"
 
   function dayOrNight() {
     if (loc.pathname === "/") {
@@ -43,7 +43,7 @@ function NavBar({ dayStyle, setDayStyle }) {
         <img src={logo} alt="logo" />
       </div>
 
-      {location && (
+      {homeLocation && (
         <>
           <div className="greetingNav">
             <h3>{userName}</h3>
