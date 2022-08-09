@@ -2,6 +2,11 @@
 
 Tech: Firebase Database, Firestore Authentication, Google Cloud hosting, React, Redux, Sass.
 
+-Instead reading this document you could see this video: https://youtu.be/0O0nLU7IanU
+-Deployment Link: https://doappauth.firebaseapp.com/
+
+
+
 # What could you do here?
 
 Every user, no matter loggin status or user subscription could see an option button and a style changer
@@ -35,7 +40,3 @@ By clicking in the detail icon, you could see the preset details, and of course 
 ![Screenshot from 2022-08-08 20-02-49](https://user-images.githubusercontent.com/89329462/183540232-10498a2a-1ba7-4869-87e0-9781441e44cd.png)
 
 Feel free to use this lovely app in any mode that fit your needs
-
-Deployment Link:
-
-https://doappauth.firebaseapp.com/
